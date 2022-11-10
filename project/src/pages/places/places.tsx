@@ -1,6 +1,6 @@
 import PlaceCard from '../place-card/place-card';
 
-type PlaceObjArr = {
+type PlaceObjectType = {
   id: number;
   placeMark?: string;
   photo: string;
@@ -9,9 +9,9 @@ type PlaceObjArr = {
   info: string;
   placeType: string;
   placeLink?: string;
-}[];
+};
 
-export default function Places(props: {placesArr: PlaceObjArr}): JSX.Element {
+export default function Places(props: {placesArr: PlaceObjectType[]}): JSX.Element {
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>

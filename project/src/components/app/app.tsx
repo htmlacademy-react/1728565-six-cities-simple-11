@@ -3,8 +3,8 @@ import Tabs from '../../pages/tabs/tabs';
 import Places from '../../pages/places/places';
 import Map from '../../pages/map/map';
 
-type CitiesArray = {cityName: string; href: string}[];
-type PlaceObjArr = {
+type CityTabObjectType = {cityName: string; href: string};
+type PlaceObjectType = {
   id: number;
   placeMark?: string;
   photo: string;
@@ -13,9 +13,9 @@ type PlaceObjArr = {
   info: string;
   placeType: string;
   placeLink?: string;
-}[];
+};
 
-function App(props: {citiesArr: CitiesArray; placesArr: PlaceObjArr}): JSX.Element {
+function App(props: {citiesArr: CityTabObjectType[]; placesArr: PlaceObjectType[]}): JSX.Element {
   return (
     <>
       <Header />

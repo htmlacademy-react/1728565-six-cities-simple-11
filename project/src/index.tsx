@@ -6,7 +6,7 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 
-const citiesArr = [
+const CITIES_TABS_ARR = [
   { cityName: 'Paris', href: '#' },
   { cityName: 'Cologne', href: '#' },
   { cityName: 'Brussels', href: '#' },
@@ -67,6 +67,6 @@ const placesArr = [
 
 root.render(
   <React.StrictMode>
-    <App citiesArr={citiesArr} placesArr={placesArr}/>
+    <App citiesArr={CITIES_TABS_ARR} placesArr={placesArr}/>
   </React.StrictMode>,
 );

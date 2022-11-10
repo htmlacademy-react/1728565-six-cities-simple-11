@@ -1,4 +1,4 @@
-type PlaceObj = {
+type PlaceObjectType = {
   id: number;
   placeMark?: string;
   photo: string;
@@ -9,7 +9,7 @@ type PlaceObj = {
   placeLink?: string;
 };
 
-export default function PlaceCard(props: {place: PlaceObj}): JSX.Element {
+export default function PlaceCard(props: {place: PlaceObjectType}): JSX.Element {
   const place = props.place;
 
   return (
