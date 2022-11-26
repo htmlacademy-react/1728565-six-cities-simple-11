@@ -1,6 +1,6 @@
-type CitiesArray = {cityName: string; href: string}[];
+import { CityTabObjectType } from '../../types/types';
 
-export default function Tabs(props: {citiesArr: CitiesArray}): JSX.Element {
+export default function Tabs(props: {citiesArr: CityTabObjectType[]}): JSX.Element {
   return (
     <div className="tabs">
       <section className="locations container">
