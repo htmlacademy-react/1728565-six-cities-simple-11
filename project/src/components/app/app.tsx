@@ -1,37 +1,34 @@
-import Header from '../../pages/header/header';
-import Tabs from '../../pages/tabs/tabs';
-import Places from '../../pages/places/places';
-import Map from '../../pages/map/map';
+import { Route, BrowserRouter, Routes } from 'react-router-dom';
+import { CityTabObjectType, PlaceObjectType} from '../../types/types';
+import { AppRoute } from '../../const';
+import Main from '../../pages/main/main';
+import NotFound from '../../pages/404/404';
+import Login from '../../pages/login/login';
+import Offer from '../../pages/offer/offer';
 
-type CityTabObjectType = {cityName: string; href: string};
-type PlaceObjectType = {
-  id: number;
-  placeMark?: string;
-  photo: string;
-  price: string;
-  rating: string;
-  info: string;
-  placeType: string;
-  placeLink?: string;
-};
 
-function App(props: {citiesArr: CityTabObjectType[]; placesArr: PlaceObjectType[]}): JSX.Element {
+function App(props: {citiesArr: CityTabObjectType[]; placesArr: PlaceObjectType[]; nearPlacesArr: PlaceObjectType[]}): JSX.Element {
   return (
-    <>
-      <Header />
-      <main>
-        <h1 className="visually-hidden">Cities</h1>
-        <Tabs citiesArr={props.citiesArr}/>
-        <div className="cities">
-          <div className="cities__places-container container">
-            <Places placesArr={props.placesArr}/>
-            <div className="cities__right-section">
-              <Map />
-            </div>
-          </div>
-        </div>
-      </main>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path={AppRoute.Root}
+          element={<Main citiesArr={props.citiesArr} placesArr={props.placesArr}/>}
+        />
+        <Route
+          path={AppRoute.Login}
+          element={<Login />}
+        />
+        <Route path={AppRoute.Offer}>
+          <Route index element={<NotFound />} />
+          <Route path=':id' element={<Offer nearPlacesArr={props.nearPlacesArr}/>} />
+        </Route>
+        <Route
+          path='*'
+          element={<NotFound />}
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
