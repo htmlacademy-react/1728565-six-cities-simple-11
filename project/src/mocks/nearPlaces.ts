@@ -1,0 +1,30 @@
+export const nearPlacesCardsArr = [
+  {
+    id: 1,
+    placeMark: 'Premeum',
+    photo: 'apartment-01.jpg',
+    price: '120',
+    rating: '80%',
+    info: 'Beautiful & luxurious apartment at great location',
+    placeType: 'Apartment',
+    placeLink: '/offer/1',
+  },
+  {
+    id: 2,
+    photo: 'room.jpg',
+    price: '80',
+    rating: '80%',
+    info: 'Wood and stone place',
+    placeType: 'Private room',
+    placeLink: '/offer/1',
+  },
+  {
+    id: 3,
+    photo: 'apartment-02.jpg',
+    price: '132',
+    rating: '80%',
+    info: 'Canal View Prinsengracht',
+    placeType: 'Apartment',
+    placeLink: '/offer/1',
+  },
+];

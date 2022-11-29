@@ -1,11 +1,20 @@
-import { PlaceObjectType } from '../../types/types';
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable no-console */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+
+import { PlaceCardObjectType } from '../../types/types';
 import { Link } from 'react-router-dom';
 
-export default function PlaceCard(props: {place: PlaceObjectType; className: string}): JSX.Element {
+export default function PlaceCard(props: {place: PlaceCardObjectType; className: string; returnActiveCard: number}): JSX.Element {
   const place = props.place;
 
   return (
-    <article className={`${props.className} place-card`}>
+    <article
+      onMouseEnter={() => props.returnActiveCard(place.id)}
+      className={`${props.className} place-card`}
+    >
       {place.placeMark &&
         <div className='place-card__mark'>
           <span>{place.placeMark}</span>
