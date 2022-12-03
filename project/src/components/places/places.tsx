@@ -1,7 +1,23 @@
-import { PlaceObjectType } from '../../types/types';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable no-console */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+
+import { useState } from 'react';
+import { PlaceCardObjectType } from '../../types/types';
 import PlaceCard from '../place-card/place-card';
 
-export default function Places(props: {placesArr: PlaceObjectType[]}): JSX.Element {
+export default function Places(props: {placesCards: PlaceCardObjectType[]}): JSX.Element {
+  const [activeCard, setActiveCard] = useState(0);
+
+  const returnActiveCard = (id: number) => {
+    // console.log(id);
+    setActiveCard(id);
+    // console.log(prevActiveCard);
+  };
+
   return (
     <section className='cities__places places'>
       <h2 className='visually-hidden'>Places</h2>
@@ -23,7 +39,13 @@ export default function Places(props: {placesArr: PlaceObjectType[]}): JSX.Eleme
       </form>
       <div className='cities__places-list places__list tabs__content'>
         {
-          props.placesArr.map((place) => <PlaceCard className='cities__card' place={place} key={place.id}/>)
+          props.placesCards.map((place) => (
+            <PlaceCard
+              className='cities__card'
+              place={place} key={place.id}
+              returnActiveCard={returnActiveCard}
+
+            />))
         }
       </div>
     </section>

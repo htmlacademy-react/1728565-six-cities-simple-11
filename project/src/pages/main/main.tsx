@@ -2,9 +2,9 @@ import Header from '../../components/header/header';
 import Map from '../../components/map/map';
 import Places from '../../components/places/places';
 import Tabs from '../../components/tabs/tabs';
-import { CityTabObjectType, PlaceObjectType } from '../../types/types';
+import { CityTabObjectType, PlaceCardObjectType } from '../../types/types';
 
-export default function Main(props: {citiesArr: CityTabObjectType[]; placesArr: PlaceObjectType[]}): JSX.Element {
+export default function Main(props: {citiesArr: CityTabObjectType[]; placesCards: PlaceCardObjectType[]}): JSX.Element {
   return (
     <div className='page page--gray page--main'>
       <Header />
@@ -13,7 +13,7 @@ export default function Main(props: {citiesArr: CityTabObjectType[]; placesArr: 
         <Tabs citiesArr={props.citiesArr}/>
         <div className='cities'>
           <div className='cities__places-container container'>
-            <Places placesArr={props.placesArr}/>
+            <Places placesCards={props.placesCards}/>
             <div className='cities__right-section'>
               <Map />
             </div>
