@@ -1,4 +1,4 @@
-export const placesCardsArr = [
+export const placesCards = [
   {
     id: 1,
     placeMark: 'Premeum',

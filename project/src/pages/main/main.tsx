@@ -4,7 +4,7 @@ import Places from '../../components/places/places';
 import Tabs from '../../components/tabs/tabs';
 import { CityTabObjectType, PlaceCardObjectType } from '../../types/types';
 
-export default function Main(props: {citiesArr: CityTabObjectType[]; placesCardsArr: PlaceCardObjectType[]}): JSX.Element {
+export default function Main(props: {citiesArr: CityTabObjectType[]; placesCards: PlaceCardObjectType[]}): JSX.Element {
   return (
     <div className='page page--gray page--main'>
       <Header />
@@ -13,7 +13,7 @@ export default function Main(props: {citiesArr: CityTabObjectType[]; placesCards
         <Tabs citiesArr={props.citiesArr}/>
         <div className='cities'>
           <div className='cities__places-container container'>
-            <Places placesArr={props.placesCardsArr}/>
+            <Places placesCards={props.placesCards}/>
             <div className='cities__right-section'>
               <Map />
             </div>

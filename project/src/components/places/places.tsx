@@ -9,13 +9,13 @@ import { useState } from 'react';
 import { PlaceCardObjectType } from '../../types/types';
 import PlaceCard from '../place-card/place-card';
 
-export default function Places(props: {placesArr: PlaceCardObjectType[]}): JSX.Element {
-  const [prevActiveCard, newActiveCard] = useState(0);
+export default function Places(props: {placesCards: PlaceCardObjectType[]}): JSX.Element {
+  const [activeCard, setActiveCard] = useState(0);
 
   const returnActiveCard = (id: number) => {
-    console.log(id);
-    newActiveCard(0 + id);
-    console.log(prevActiveCard);
+    // console.log(id);
+    setActiveCard(id);
+    // console.log(prevActiveCard);
   };
 
   return (
@@ -39,7 +39,7 @@ export default function Places(props: {placesArr: PlaceCardObjectType[]}): JSX.E
       </form>
       <div className='cities__places-list places__list tabs__content'>
         {
-          props.placesArr.map((place) => (
+          props.placesCards.map((place) => (
             <PlaceCard
               className='cities__card'
               place={place} key={place.id}

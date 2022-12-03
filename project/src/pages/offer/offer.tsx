@@ -3,7 +3,7 @@ import PlaceCard from '../../components/place-card/place-card';
 import Property from '../../components/property/property';
 import { PlaceCardObjectType, PlaceOfferObjectType } from '../../types/types';
 
-export default function Offer(props: {placeOffer: PlaceOfferObjectType; nearPlacesCardsArr: PlaceCardObjectType[]}): JSX.Element {
+export default function Offer(props: {placeOffer: PlaceOfferObjectType; nearPlacesCards: PlaceCardObjectType[]}): JSX.Element {
   return (
     <div className='page'>
       <Header />
@@ -14,7 +14,7 @@ export default function Offer(props: {placeOffer: PlaceOfferObjectType; nearPlac
             <h2 className='near-places__title'>Other places in the neighbourhood</h2>
             <div className='near-places__list places__list'>
               {
-                props.nearPlacesCardsArr.map((place) => <PlaceCard className='near-places__card' place={place} key={place.id}/>)
+                props.nearPlacesCards.map((place) => <PlaceCard className='near-places__card' place={place} key={place.id}/>)
               }
             </div>
           </section>

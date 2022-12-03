@@ -7,7 +7,7 @@ import Login from '../../pages/login/login';
 import Offer from '../../pages/offer/offer';
 
 
-function App(props: {citiesArr: CityTabObjectType[]; placesCardsArr: PlaceCardObjectType[]; placeOffer: PlaceOfferObjectType; nearPlacesCardsArr: PlaceCardObjectType[]}): JSX.Element {
+function App(props: {citiesArr: CityTabObjectType[]; placesCards: PlaceCardObjectType[]; placeOffer: PlaceOfferObjectType; nearPlacesCards: PlaceCardObjectType[]}): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
@@ -16,7 +16,7 @@ function App(props: {citiesArr: CityTabObjectType[]; placesCardsArr: PlaceCardOb
           element={
             <Main
               citiesArr={props.citiesArr}
-              placesCardsArr={props.placesCardsArr}
+              placesCards={props.placesCards}
             />
           }
         />
@@ -29,7 +29,7 @@ function App(props: {citiesArr: CityTabObjectType[]; placesCardsArr: PlaceCardOb
           <Route path=':id' element={
             <Offer
               placeOffer={props.placeOffer}
-              nearPlacesCardsArr={props.nearPlacesCardsArr}
+              nearPlacesCards={props.nearPlacesCards}
             />
           }
           />

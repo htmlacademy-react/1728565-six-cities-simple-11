@@ -1,4 +1,4 @@
-export const nearPlacesCardsArr = [
+export const nearPlacesCards = [
   {
     id: 1,
     placeMark: 'Premeum',
