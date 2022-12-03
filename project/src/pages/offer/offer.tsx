@@ -20,7 +20,7 @@ export default function Offer(props: {placeOffer: PlaceOfferObjectType; nearPlac
             <h2 className='near-places__title'>Other places in the neighbourhood</h2>
             <div className='near-places__list places__list'>
               {
-                nearPlacesCards.map((place) => <PlaceCard className='near-places__card' place={place} key={place.id}/>)
+                nearPlacesCards.map((place) => <PlaceCard className='near-places__card' place={place} key={place.id} returnActiveCard={0}/>)
               }
             </div>
           </section>

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {useState} from 'react';
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
