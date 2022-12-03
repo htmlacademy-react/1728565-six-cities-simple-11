@@ -44,7 +44,6 @@ export default function Places(props: {placesCards: PlaceCardObjectType[]}): JSX
               className='cities__card'
               place={place} key={place.id}
               returnActiveCard={returnActiveCard}
-
             />))
         }
       </div>
