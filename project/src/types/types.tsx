@@ -1,3 +1,5 @@
+export type ClassNameType = {className: string};
+
 export type CityTabObjectType = {cityName: string; href: string};
 
 export type PlaceCardObjectType = {
@@ -42,3 +44,17 @@ export type ReviewObjectType = {
   dateTime: string;
 };
 
+export type City = {
+  title: string;
+  lat: number;
+  lng: number;
+  zoom: number;
+};
+
+export type Point = {
+  title: string;
+  lat: number;
+  lng: number;
+};
+
+export type Points = Point[];

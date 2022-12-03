@@ -1,5 +1,5 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
-import { CityTabObjectType, PlaceCardObjectType, PlaceOfferObjectType } from '../../types/types';
+import { City, CityTabObjectType, PlaceCardObjectType, PlaceOfferObjectType, Points } from '../../types/types';
 import { AppRoute } from '../../const';
 import Main from '../../pages/main/main';
 import NotFound from '../../pages/404/404';
@@ -7,7 +7,9 @@ import Login from '../../pages/login/login';
 import Offer from '../../pages/offer/offer';
 
 
-function App(props: {citiesArr: CityTabObjectType[]; placesCards: PlaceCardObjectType[]; placeOffer: PlaceOfferObjectType; nearPlacesCards: PlaceCardObjectType[]}): JSX.Element {
+function App(props: {citiesArr: CityTabObjectType[]; placesCards: PlaceCardObjectType[]; placeOffer: PlaceOfferObjectType; nearPlacesCards: PlaceCardObjectType[]; city: City; points: Points}): JSX.Element {
+  const {citiesArr, placesCards, placeOffer, nearPlacesCards, city, points} = props;
+
   return (
     <BrowserRouter>
       <Routes>
@@ -15,8 +17,10 @@ function App(props: {citiesArr: CityTabObjectType[]; placesCards: PlaceCardObjec
           path={AppRoute.Root}
           element={
             <Main
-              citiesArr={props.citiesArr}
-              placesCards={props.placesCards}
+              citiesArr={citiesArr}
+              placesCards={placesCards}
+              city={city}
+              points={points}
             />
           }
         />
@@ -28,8 +32,10 @@ function App(props: {citiesArr: CityTabObjectType[]; placesCards: PlaceCardObjec
           <Route index element={<NotFound />} />
           <Route path=':id' element={
             <Offer
-              placeOffer={props.placeOffer}
-              nearPlacesCards={props.nearPlacesCards}
+              placeOffer={placeOffer}
+              nearPlacesCards={nearPlacesCards}
+              city={city}
+              points={points}
             />
           }
           />
