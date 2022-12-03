@@ -6,9 +6,9 @@ import Reviews from '../reviews/reviews';
 export default function Property(props: {placeOffer: PlaceOfferObjectType; city: City; points: Points}): JSX.Element {
   const {placeOffer, city, points} = props;
 
-  const [selectedPoint, setSelectedPoint] = useState<Point | undefined>(
-    undefined
-  );
+  // const [selectedPoint, setSelectedPoint] = useState<Point | undefined>(
+  //   undefined
+  // );
 
   const owner = placeOffer.owner;
   const reviews = placeOffer.reviews;
@@ -98,7 +98,7 @@ export default function Property(props: {placeOffer: PlaceOfferObjectType; city:
         className='property__map'
         city={city}
         points={points}
-        selectedPoint={selectedPoint}
+        selectedPoint={undefined}
       />
     </section>
   );
