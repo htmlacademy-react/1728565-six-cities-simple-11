@@ -5,6 +5,8 @@ import { CITIES_TABS_ARR } from './mocks/citiesTab';
 import { placesCards } from './mocks/offers';
 import { placeOffer } from './mocks/offer';
 import { nearPlacesCards } from './mocks/nearPlaces';
+import { POINTS } from './mocks/points';
+import { CITY } from './mocks/city';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -17,6 +19,8 @@ root.render(
       placesCards={placesCards}
       placeOffer={placeOffer}
       nearPlacesCards={nearPlacesCards}
+      points={POINTS}
+      city={CITY}
     />
   </React.StrictMode>,
 );

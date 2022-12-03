@@ -1,18 +1,24 @@
-import { PlaceOfferObjectType } from '../../types/types';
-import PropertyMap from '../propertyMap/propertyMap';
+import {useState} from 'react';
+import { City, PlaceOfferObjectType, Point, Points } from '../../types/types';
+import Map from '../map/map';
 import Reviews from '../reviews/reviews';
 
-export default function Property(props: {placeOffer: PlaceOfferObjectType}): JSX.Element {
-  const offer = props.placeOffer;
-  const owner = props.placeOffer.owner;
-  const reviewsArr = props.placeOffer.reviews;
+export default function Property(props: {placeOffer: PlaceOfferObjectType; city: City; points: Points}): JSX.Element {
+  const {placeOffer, city, points} = props;
+
+  const [selectedPoint, setSelectedPoint] = useState<Point | undefined>(
+    undefined
+  );
+
+  const owner = placeOffer.owner;
+  const reviews = placeOffer.reviews;
 
   return (
     <section className='property'>
       <div className='property__gallery-container container'>
         <div className='property__gallery'>
           {
-            offer.photoGallery.map((photo) => (
+            placeOffer.photoGallery.map((photo) => (
               <div className='property__image-wrapper' key=''>
                 <img className='property__image' src={photo} alt='Photo studio' />
               </div>
@@ -22,42 +28,42 @@ export default function Property(props: {placeOffer: PlaceOfferObjectType}): JSX
       </div>
       <div className='property__container container'>
         <div className='property__wrapper'>
-          {offer.placeMark &&
+          {placeOffer.placeMark &&
             <div className='property__mark'>
-              <span>{offer.placeMark}</span>
+              <span>{placeOffer.placeMark}</span>
             </div>}
           <div className='property__name-wrapper'>
             <h1 className='property__name'>
-              {offer.name}
+              {placeOffer.name}
             </h1>
           </div>
           <div className='property__rating rating'>
             <div className='property__stars rating__stars'>
-              <span style={{width: offer.ratingStars}}></span>
+              <span style={{width: placeOffer.ratingStars}}></span>
               <span className='visually-hidden'>Rating</span>
             </div>
-            <span className='property__rating-value rating__value'>{offer.ratingNum}</span>
+            <span className='property__rating-value rating__value'>{placeOffer.ratingNum}</span>
           </div>
           <ul className='property__features'>
             <li className='property__feature property__feature--entire'>
-              {offer.type}
+              {placeOffer.type}
             </li>
             <li className='property__feature property__feature--bedrooms'>
-              {offer.rooms}
+              {placeOffer.rooms}
             </li>
             <li className='property__feature property__feature--adults'>
-              {offer.capacity}
+              {placeOffer.capacity}
             </li>
           </ul>
           <div className='property__price'>
-            <b className='property__price-value'>&euro;{offer.price}</b>
+            <b className='property__price-value'>&euro;{placeOffer.price}</b>
             <span className='property__price-text'>&nbsp;night</span>
           </div>
           <div className='property__inside'>
             <h2 className='property__inside-title'>What&apos;s inside</h2>
             <ul className='property__inside-list'>
               {
-                offer.features.map((feature) => (
+                placeOffer.features.map((feature) => (
                   <li className='property__inside-item' key=''>
                     {feature}
                   </li>
@@ -81,14 +87,19 @@ export default function Property(props: {placeOffer: PlaceOfferObjectType}): JSX
             </div>
             <div className='property__description'>
               {
-                offer.info.map((text) => (<p className='property__text' key=''>{text}</p>))
+                placeOffer.info.map((text) => (<p className='property__text' key=''>{text}</p>))
               }
             </div>
           </div>
         </div>
-        <Reviews reviewsArr={reviewsArr}/>
+        <Reviews reviews={reviews}/>
       </div>
-      <PropertyMap />
+      <Map
+        className='property__map'
+        city={city}
+        points={points}
+        selectedPoint={selectedPoint}
+      />
     </section>
   );
 }
