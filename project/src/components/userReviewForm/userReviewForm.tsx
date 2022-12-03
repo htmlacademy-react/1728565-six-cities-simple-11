@@ -1,5 +1,26 @@
+import { useState } from 'react';
+
+function FormCheck ({review}): JSX.Element {
+  return (
+    <>
+      <h2>Отправленный отзыв</h2>
+      <p>Отзыв: {review}</p>
+    </>
+  );
+}
+
 export default function UserReviewForm(): JSX.Element {
-  return(
+  const [formData, setFormData] = useState({
+    review: '',
+  });
+
+  const formChangeHandle = (e) => {
+    const {name, value} = e.target;
+    setFormData({...formData, [name]: value});
+  };
+
+
+  return (
     <form className='reviews__form form' action='#' method='post'>
       <label className='reviews__label form__label' htmlFor='review'>Your review</label>
       <div className='reviews__rating-form form__rating'>
@@ -38,13 +59,23 @@ export default function UserReviewForm(): JSX.Element {
           </svg>
         </label>
       </div>
-      <textarea className='reviews__textarea form__textarea' id='review' name='review' placeholder='Tell how was your stay, what you like and what can be improved'></textarea>
+      <textarea
+        className='reviews__textarea form__textarea'
+        id='review'
+        value={formData.review}
+        name='review'
+        placeholder='Tell how was your stay, what you like and what can be improved'
+        onChange={formChangeHandle}
+      >
+      </textarea>
       <div className='reviews__button-wrapper'>
         <p className='reviews__help'>
           To submit review please make sure to set <span className='reviews__star'>rating</span> and describe your stay with at least <b className='reviews__text-amount'>50 characters</b>.
         </p>
         <button className='reviews__submit form__submit button' type='submit' disabled>Submit</button>
       </div>
+      <FormCheck {...formData}/>
     </form>
+
   );
 }
