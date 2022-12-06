@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import {createReducer} from '@reduxjs/toolkit';
 import {selectCity, loadOffers} from './action';
 import {offers} from '../mocks/offers';
