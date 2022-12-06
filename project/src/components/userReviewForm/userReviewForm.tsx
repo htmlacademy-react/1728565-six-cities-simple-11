@@ -1,31 +1,23 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/restrict-plus-operands */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable no-console */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+// import { useState } from 'react';
 
-import { useState } from 'react';
-
-function FormCheck (props: {review: string}): JSX.Element {
-  return (
-    <>
-      <h2>Отправленный отзыв</h2>
-      <p>Отзыв: {props.review}</p>
-    </>
-  );
-}
+// function FormCheck (props: {review: string}): JSX.Element {
+//   return (
+//     <>
+//       <h2>Отправленный отзыв</h2>
+//       <p>Отзыв: {props.review}</p>
+//     </>
+//   );
+// }
 
 export default function UserReviewForm(): JSX.Element {
-  const [formData, setFormData] = useState({
-    review: '',
-  });
+  // const [formData, setFormData] = useState({
+  //   review: '',
+  // });
 
-  const formChangeHandle = (e) => {
-    const {name, value} = e.target;
-    setFormData({...formData, [name]: value});
-  };
+  // const formChangeHandle = (e) => {
+  //   const {name, value} = e.target;
+  //   setFormData({...formData, [name]: value});
+  // };
 
 
   return (
@@ -70,10 +62,10 @@ export default function UserReviewForm(): JSX.Element {
       <textarea
         className='reviews__textarea form__textarea'
         id='review'
-        value={formData.review}
+        // value={formData.review}
         name='review'
         placeholder='Tell how was your stay, what you like and what can be improved'
-        onChange={formChangeHandle}
+        // onChange={formChangeHandle}
       >
       </textarea>
       <div className='reviews__button-wrapper'>
@@ -82,7 +74,7 @@ export default function UserReviewForm(): JSX.Element {
         </p>
         <button className='reviews__submit form__submit button' type='submit' disabled>Submit</button>
       </div>
-      <FormCheck {...formData}/>
+      {/* <FormCheck {...formData}/> */}
     </form>
 
   );

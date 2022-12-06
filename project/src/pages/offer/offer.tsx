@@ -1,17 +1,17 @@
 import Header from '../../components/header/header';
 import PlaceCard from '../../components/place-card/place-card';
 import Property from '../../components/property/property';
-import { City, PlaceCardObjectType, PlaceOfferObjectType, Points } from '../../types/types';
+import { City, PlaceOfferObjectType, Points } from '../../types/types';
 
-export default function Offer(props: {placeOffer: PlaceOfferObjectType; nearPlacesCards: PlaceCardObjectType[]; city: City; points: Points}): JSX.Element {
-  const {placeOffer, nearPlacesCards, city, points} = props;
+export default function Offer(props: {offer: PlaceOfferObjectType; nearOffers: PlaceOfferObjectType[]; city: City; points: Points}): JSX.Element {
+  const {offer, nearOffers, city, points} = props;
 
   return (
     <div className='page'>
       <Header />
       <main className='page__main page__main--property'>
         <Property
-          placeOffer={placeOffer}
+          offer={offer}
           city={city}
           points={points}
         />
@@ -20,7 +20,7 @@ export default function Offer(props: {placeOffer: PlaceOfferObjectType; nearPlac
             <h2 className='near-places__title'>Other places in the neighbourhood</h2>
             <div className='near-places__list places__list'>
               {
-                nearPlacesCards.map((place) => <PlaceCard className='near-places__card' place={place} key={place.id} returnActiveCard={0}/>)
+                nearOffers.map((nearOffer) => <PlaceCard className='near-places__card' offer={nearOffer} key={nearOffer.id} returnActiveCard={0}/>)
               }
             </div>
           </section>
