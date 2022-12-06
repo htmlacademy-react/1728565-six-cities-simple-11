@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {useState} from 'react';
 import { City, PlaceOfferObjectType, Point, Points } from '../../types/types';
 import Map from '../map/map';

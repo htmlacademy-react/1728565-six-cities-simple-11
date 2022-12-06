@@ -1,10 +1,18 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable no-console */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+
 import { useState } from 'react';
 
-function FormCheck ({review}): JSX.Element {
+function FormCheck (props: {review: string}): JSX.Element {
   return (
     <>
       <h2>Отправленный отзыв</h2>
-      <p>Отзыв: {review}</p>
+      <p>Отзыв: {props.review}</p>
     </>
   );
 }
