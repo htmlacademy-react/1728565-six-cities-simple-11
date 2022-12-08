@@ -1,5 +1,5 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
-import { City, CityTabObjectType, PlaceOfferObjectType, Points } from '../../types/types';
+import { City, OfferObjectType } from '../../types/types';
 import { AppRoute } from '../../const';
 import Main from '../../pages/main/main';
 import NotFound from '../../pages/404/404';
@@ -7,8 +7,8 @@ import Login from '../../pages/login/login';
 import Offer from '../../pages/offer/offer';
 
 
-function App(props: {cities: CityTabObjectType[]; offers: PlaceOfferObjectType[]; nearOffers: PlaceOfferObjectType[]; city: City; points: Points}): JSX.Element {
-  const {cities, offers, nearOffers, city, points} = props;
+function App(props: {cities: City[]; offers: OfferObjectType[]; nearOffers: OfferObjectType[]}): JSX.Element {
+  const {cities, offers, nearOffers } = props;
 
   return (
     <BrowserRouter>
@@ -18,8 +18,6 @@ function App(props: {cities: CityTabObjectType[]; offers: PlaceOfferObjectType[]
           element={
             <Main
               cities={cities}
-              city={city}
-              points={points}
             />
           }
         />
@@ -33,8 +31,6 @@ function App(props: {cities: CityTabObjectType[]; offers: PlaceOfferObjectType[]
             <Offer
               offer={offers[0]}
               nearOffers={nearOffers}
-              city={city}
-              points={points}
             />
           }
           />

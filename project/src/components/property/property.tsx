@@ -1,16 +1,21 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {useState} from 'react';
-import { City, PlaceOfferObjectType, Point, Points } from '../../types/types';
+import { useAppSelector } from '../../hooks';
+import { CITIES } from '../../mocks/cities';
+import { City, OfferObjectType, Point, Points } from '../../types/types';
 import Map from '../map/map';
 import Reviews from '../reviews/reviews';
 
-export default function Property(props: {offer: PlaceOfferObjectType; city: City; points: Points}): JSX.Element {
-  const {offer, city, points} = props;
+export default function Property(props: {offer: OfferObjectType; nearOffers: OfferObjectType[]}): JSX.Element {
+  const {offer, nearOffers} = props;
 
-  const [selectedPoint, setSelectedPoint] = useState<Point | undefined>(
+  const [selectedPoint, setSelectedPoint] = useState<OfferObjectType | undefined>(
     undefined
   );
+
+  const selectedCity = useAppSelector((state) => state.city);
+  const cityMap = CITIES.filter((city) => city.title === selectedCity)[0];
 
   const owner = offer.owner;
   const reviews = offer.reviews;
@@ -98,8 +103,8 @@ export default function Property(props: {offer: PlaceOfferObjectType; city: City
       </div>
       <Map
         className='property__map'
-        city={city}
-        points={points}
+        city={cityMap}
+        offers={nearOffers}
         selectedPoint={selectedPoint}
       />
     </section>
