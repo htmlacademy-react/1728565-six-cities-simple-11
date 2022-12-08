@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { createReducer } from '@reduxjs/toolkit';
-import { selectCity, loadOffers, sortOffers } from './action';
+import { selectCity, loadOffers, sortOffers, getHotels } from './action';
 import { offers } from '../mocks/offers';
 import { OfferObjectType } from '../types/types';
 import { SortTypes } from '../const';
@@ -12,6 +12,7 @@ const initialState = {
   filteredOffers: offers.filter((offer) => offer.city === 'Amsterdam'),
   sorting: SORTING,
   sort: 'Popular',
+  hotels: [],
 };
 
 const getSortedOffers = (offersList: OfferObjectType[], sortType: string) => {
@@ -40,5 +41,8 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(sortOffers, (state, action) => {
       state.sort = action.payload.sort;
       state.filteredOffers = getSortedOffers(state.filteredOffers, state.sort);
+    })
+    .addCase(getHotels, (state, action) => {
+      state.hotels = action.payload;
     });
 });
