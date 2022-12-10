@@ -17,14 +17,17 @@ export default function Offer(): JSX.Element {
   const property = useAppSelector((store) => store.offer);
   const nearOffers = useAppSelector(getNearOffers);
 
-  const getMapOffers = () => {
-    const offers = [property];
-    return offers;
-  };
-
-  if (property === null) {
+  if (property === undefined) {
     return <Navigate to={AppRoute.Root} />;
   }
+
+  const getMapOffers = () => {
+    const offers = [property];
+    if (nearOffers) {
+      return offers.concat(nearOffers);
+    }
+    return offers;
+  };
 
   const setHoveredCardActive = (offer: Hotel) => {
     setSelectedPoint(offer);

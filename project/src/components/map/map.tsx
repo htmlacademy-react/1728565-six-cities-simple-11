@@ -9,7 +9,7 @@ import { City } from '../../types/city';
 
 type MapProps = {
   city: City;
-  offers: Hotels | null;
+  offers: Hotels | undefined;
   selectedPoint: Hotel | undefined;
 };
 

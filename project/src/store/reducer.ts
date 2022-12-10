@@ -15,7 +15,7 @@ type InitialState = {
   sorting: Sorting[];
   sort: string;
   hotels: Hotels;
-  offer: Hotel | null;
+  offer: Hotel | undefined;
   authorizationStatus: AuthorizationStatus;
   userEmail: string | null;
   error: string | null;
@@ -32,7 +32,7 @@ const initialState: InitialState = {
   sorting: SORTING,
   sort: 'Popular',
   hotels: [],
-  offer: null,
+  offer: undefined,
   authorizationStatus: AuthorizationStatus.Unknown,
   userEmail: null,
   error: null,
@@ -45,7 +45,7 @@ export const getUserEmail = (state: State): string | null => state.userEmail;
 export const getOffers = (state: State): Hotels => state.hotels;
 export const getCity = (state: State): string => state.city.name;
 export const getSort = (state: State): string => state.sort;
-export const getOfferData = (state: State): Hotel | null => state.offer;
+export const getOfferData = (state: State): Hotel | undefined => state.offer;
 
 
 const getSortedOffers = (offersList: Hotels, sortType: string) => {
@@ -86,7 +86,7 @@ export const getNearOffers = createSelector(
   getOffers,
   getCity,
   (offer, offers, city) => {
-    if (offer === null) {
+    if (offer === undefined) {
       return;
     }
     const filteredOffers = offers.filter((offerItem) => offerItem.city.name === city);
