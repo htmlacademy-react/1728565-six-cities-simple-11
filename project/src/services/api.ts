@@ -51,5 +51,3 @@ export const createAPI = (): AxiosInstance => {
 
   return api;
 };
-
-// useless commit
