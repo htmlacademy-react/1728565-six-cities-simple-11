@@ -1,26 +1,27 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {useState} from 'react';
 import { City, PlaceOfferObjectType, Point, Points } from '../../types/types';
 import Map from '../map/map';
 import Reviews from '../reviews/reviews';
 
-export default function Property(props: {placeOffer: PlaceOfferObjectType; city: City; points: Points}): JSX.Element {
-  const {placeOffer, city, points} = props;
+export default function Property(props: {offer: PlaceOfferObjectType; city: City; points: Points}): JSX.Element {
+  const {offer, city, points} = props;
 
   const [selectedPoint, setSelectedPoint] = useState<Point | undefined>(
     undefined
   );
 
-  const owner = placeOffer.owner;
-  const reviews = placeOffer.reviews;
+  const owner = offer.owner;
+  const reviews = offer.reviews;
 
   return (
     <section className='property'>
       <div className='property__gallery-container container'>
         <div className='property__gallery'>
           {
-            placeOffer.photoGallery.map((photo) => (
-              <div className='property__image-wrapper' key=''>
+            offer.photoGallery.map((photo, i) => (
+              <div className='property__image-wrapper' key={`photo-${i}`}>
                 <img className='property__image' src={photo} alt='Photo studio' />
               </div>
             ))
@@ -29,43 +30,43 @@ export default function Property(props: {placeOffer: PlaceOfferObjectType; city:
       </div>
       <div className='property__container container'>
         <div className='property__wrapper'>
-          {placeOffer.placeMark &&
+          {offer.placeMark &&
             <div className='property__mark'>
-              <span>{placeOffer.placeMark}</span>
+              <span>{offer.placeMark}</span>
             </div>}
           <div className='property__name-wrapper'>
             <h1 className='property__name'>
-              {placeOffer.name}
+              {offer.name}
             </h1>
           </div>
           <div className='property__rating rating'>
             <div className='property__stars rating__stars'>
-              <span style={{width: placeOffer.ratingStars}}></span>
+              <span style={{width: offer.ratingStars}}></span>
               <span className='visually-hidden'>Rating</span>
             </div>
-            <span className='property__rating-value rating__value'>{placeOffer.ratingNum}</span>
+            <span className='property__rating-value rating__value'>{offer.ratingNum}</span>
           </div>
           <ul className='property__features'>
             <li className='property__feature property__feature--entire'>
-              {placeOffer.type}
+              {offer.type}
             </li>
             <li className='property__feature property__feature--bedrooms'>
-              {placeOffer.rooms}
+              {offer.rooms}
             </li>
             <li className='property__feature property__feature--adults'>
-              {placeOffer.capacity}
+              {offer.capacity}
             </li>
           </ul>
           <div className='property__price'>
-            <b className='property__price-value'>&euro;{placeOffer.price}</b>
+            <b className='property__price-value'>&euro;{offer.price}</b>
             <span className='property__price-text'>&nbsp;night</span>
           </div>
           <div className='property__inside'>
             <h2 className='property__inside-title'>What&apos;s inside</h2>
             <ul className='property__inside-list'>
               {
-                placeOffer.features.map((feature) => (
-                  <li className='property__inside-item' key=''>
+                offer.features.map((feature, i) => (
+                  <li className='property__inside-item' key={`feature-${i}`}>
                     {feature}
                   </li>
                 ))
@@ -88,7 +89,7 @@ export default function Property(props: {placeOffer: PlaceOfferObjectType; city:
             </div>
             <div className='property__description'>
               {
-                placeOffer.info.map((text) => (<p className='property__text' key=''>{text}</p>))
+                offer.info.map((text, i) => (<p className='property__text' key={`infotext-${i}`}>{text}</p>))
               }
             </div>
           </div>

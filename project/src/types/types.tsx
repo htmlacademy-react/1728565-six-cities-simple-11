@@ -16,6 +16,7 @@ export type PlaceCardObjectType = {
 
 export type PlaceOfferObjectType = {
   id: string;
+  city: string;
   placeMark?: string;
   photoGallery: string[];
   name: string;

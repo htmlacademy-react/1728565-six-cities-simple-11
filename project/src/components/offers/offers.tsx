@@ -6,22 +6,24 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 
 import { useState } from 'react';
-import { PlaceCardObjectType } from '../../types/types';
+import { useAppSelector } from '../../hooks';
+import { PlaceOfferObjectType } from '../../types/types';
 import PlaceCard from '../place-card/place-card';
 
-export default function Places(props: {placesCards: PlaceCardObjectType[]}): JSX.Element {
+export default function Offers(): JSX.Element {
   const [activeCard, setActiveCard] = useState(0);
 
-  const returnActiveCard = (id: number) => {
-    // console.log(id);
+  const returnActiveCard = (id: number): void => {
     setActiveCard(id);
-    // console.log(prevActiveCard);
   };
+
+  const city = useAppSelector((state) => state.city);
+  const offers = useAppSelector((state) => state.filteredOffers);
 
   return (
     <section className='cities__places places'>
       <h2 className='visually-hidden'>Places</h2>
-      <b className='places__found'>312 places to stay in Amsterdam</b>
+      <b className='places__found'>312 places to stay in {city}</b>
       <form className='places__sorting' action='#' method='get'>
         <span className='places__sorting-caption'>Sort by</span>
         <span className='places__sorting-type' tabIndex={0}>
@@ -39,10 +41,10 @@ export default function Places(props: {placesCards: PlaceCardObjectType[]}): JSX
       </form>
       <div className='cities__places-list places__list tabs__content'>
         {
-          props.placesCards.map((place) => (
+          offers.map((offer) => (
             <PlaceCard
               className='cities__card'
-              place={place} key={place.id}
+              offer={offer} key={`offercard-${offer.id}`}
               returnActiveCard={returnActiveCard}
             />))
         }
