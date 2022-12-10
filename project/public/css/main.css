@@ -873,15 +873,21 @@ img {
   border-radius: 4px
 }
 
-.places__options--custom {
+.places__options-wrapper {
+  padding: 10px;
   position: absolute;
-  top: calc(100% + 1px);
-  left: 52px;
+  top: calc(100% - 10px);
+  left: 42px;
   z-index: 1;
   display: none
 }
 
-.places__options--opened {
+/* .places__options--custom {
+
+
+} */
+
+.places__options-wrapper--opened {
   display: block
 }
 
@@ -918,7 +924,8 @@ img {
   padding-right: 12px;
   font-size: 12px;
   line-height: 1.167;
-  cursor: pointer
+  cursor: pointer;
+  z-index: 2;
 }
 
 .place-card {

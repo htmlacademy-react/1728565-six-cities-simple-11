@@ -1,54 +1,63 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/restrict-plus-operands */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable no-console */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import Map from '../../components/map/map';
+import OfferCard from '../offer-card/offer-card';
+import Sort from '../sort/sort';
 import { useState } from 'react';
-import { useAppSelector } from '../../hooks';
-import { PlaceOfferObjectType } from '../../types/types';
-import PlaceCard from '../place-card/place-card';
+// import { CITIES } from '../../mocks/cities';
+import { getFilteredOffers } from '../../store/reducer';
+import { Hotel } from '../../types/hotels';
+import { getOffer } from '../../store/action';
 
 export default function Offers(): JSX.Element {
-  const [activeCard, setActiveCard] = useState(0);
+  const [selectedPoint, setSelectedPoint] = useState<Hotel | undefined>(
+    undefined
+  );
 
-  const returnActiveCard = (id: number): void => {
-    setActiveCard(id);
+  const dispatch = useAppDispatch();
+
+  const selectedCity = useAppSelector((state) => state.city);
+  const offers = useAppSelector(getFilteredOffers);
+
+  const setHoveredCardActive = (offer: Hotel) => {
+    setSelectedPoint(offer);
   };
 
-  const city = useAppSelector((state) => state.city);
-  const offers = useAppSelector((state) => state.filteredOffers);
+  const getClickedOffer = (offer: Hotel) => {
+    dispatch(getOffer(offer));
+  };
+
+  const resetActiveCard = () => {
+    setSelectedPoint(undefined);
+  };
 
   return (
-    <section className='cities__places places'>
-      <h2 className='visually-hidden'>Places</h2>
-      <b className='places__found'>312 places to stay in {city}</b>
-      <form className='places__sorting' action='#' method='get'>
-        <span className='places__sorting-caption'>Sort by</span>
-        <span className='places__sorting-type' tabIndex={0}>
-          Popular
-          <svg className='places__sorting-arrow' width='7' height='4'>
-            <use xlinkHref='#icon-arrow-select'></use>
-          </svg>
-        </span>
-        <ul className='places__options places__options--custom places__options--opened'>
-          <li className='places__option places__option--active' tabIndex={0}>Popular</li>
-          <li className='places__option' tabIndex={0}>Price: low to high</li>
-          <li className='places__option' tabIndex={0}>Price: high to low</li>
-          <li className='places__option' tabIndex={0}>Top rated first</li>
-        </ul>
-      </form>
-      <div className='cities__places-list places__list tabs__content'>
-        {
-          offers.map((offer) => (
-            <PlaceCard
-              className='cities__card'
-              offer={offer} key={`offercard-${offer.id}`}
-              returnActiveCard={returnActiveCard}
-            />))
-        }
+    <div className='cities'>
+      <div className='cities__places-container container'>
+        <section className='cities__places places'>
+          <h2 className='visually-hidden'>Places</h2>
+          <b className='places__found'>{offers.length} places to stay in {selectedCity.name}</b>
+          <Sort />
+          <div className='cities__places-list places__list tabs__content' onMouseLeave={resetActiveCard}>
+            {offers.map((offer) => (
+              <OfferCard
+                className='cities__card'
+                offer={offer}
+                key={`offercard-${offer.id}`}
+                setHoveredCardActive={setHoveredCardActive}
+                getClickedOffer={getClickedOffer}
+              />
+            ))}
+          </div>
+        </section>
+        <div className='cities__right-section'>
+          <Map
+            className='cities__map'
+            city={selectedCity}
+            offers={offers}
+            selectedPoint={selectedPoint}
+          />
+        </div>
       </div>
-    </section>
+    </div>
   );
 }

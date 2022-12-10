@@ -1,28 +1,34 @@
 import { selectCity } from '../../store/action';
-import { CityTabObjectType } from '../../types/types';
+// import { getCitiesList } from '../../store/reducer';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { Link } from 'react-router-dom';
 
-export default function Tabs(props: {cities: CityTabObjectType[]}): JSX.Element {
-  const {cities} = props;
+import { City } from '../../types/city';
+import { CITIES } from '../../const';
 
+export default function Tabs(): JSX.Element {
   const activeCity = useAppSelector((state) => state.city);
   const dispatch = useAppDispatch();
 
-  const onCityClick = (e: React.MouseEvent) => {
-    const value = (e.target as HTMLElement).innerText;
-    dispatch(selectCity({city: value}));
+  const cities = CITIES;
+
+  const onCityClick = (city: City) => {
+    dispatch(selectCity(city));
   };
 
   return (
-    <div className="tabs">
-      <section className="locations container">
-        <ul className="locations__list tabs__list">
+    <div className='tabs'>
+      <section className='locations container'>
+        <ul className='locations__list tabs__list'>
           {
             cities.map((city)=> (
-              <li className="locations__item" key={city.cityName}>
-                <Link className={`locations__item-link tabs__item ${city.cityName === activeCity ? 'tabs__item--active' : ''}`} to={city.href} onClick={onCityClick}>
-                  <span>{city.cityName}</span>
+              <li className='locations__item' key={city.name}>
+                <Link
+                  className={`locations__item-link tabs__item ${city.name === activeCity.name ? 'tabs__item--active' : ''}`}
+                  to={''}
+                  onClick={() => onCityClick(city)}
+                >
+                  <span>{city.name}</span>
                 </Link>
               </li>
             ))

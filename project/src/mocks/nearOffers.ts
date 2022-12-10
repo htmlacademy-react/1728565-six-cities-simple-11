@@ -2,8 +2,12 @@ export const nearOffers = [
   {
     id: '1',
     city: 'Amsterdam',
+    location: {
+      lat: 52.3909553943508,
+      lng: 4.85309666406198
+    },
     placeMark: 'Premeum',
-    photoGallery: ['img/room.jpg', 'img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/studio-01.jpg', 'img/apartment-01.jpg'],
+    photoGallery: ['img/apartment-01.jpg', 'img/room.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/studio-01.jpg', 'img/apartment-01.jpg'],
     name: 'Beautiful & luxurious apartment at great location',
     ratingStars: '80%',
     ratingNum: '4.8',
@@ -34,10 +38,14 @@ export const nearOffers = [
   {
     id: '2',
     city: 'Amsterdam',
+    location: {
+      lat: 52.3609553943508,
+      lng: 4.85309666406198
+    },
     photoGallery: ['img/room.jpg', 'img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/studio-01.jpg', 'img/apartment-01.jpg'],
     name: 'Wood and stone place',
     ratingStars: '80%',
-    ratingNum: '4.8',
+    ratingNum: '4.3',
     type: 'Private room',
     rooms: '3 Bedrooms',
     capacity: 'Max 4 adults',
@@ -65,10 +73,14 @@ export const nearOffers = [
   {
     id: '3',
     city: 'Amsterdam',
+    location: {
+      lat: 52.3909553943508,
+      lng: 4.929309666406198
+    },
     photoGallery: ['img/apartment-02.jpg', 'img/room.jpg', 'img/apartment-01.jpg', 'img/apartment-03.jpg', 'img/studio-01.jpg', 'img/apartment-01.jpg'],
     name: 'Canal View Prinsengracht',
     ratingStars: '80%',
-    ratingNum: '4.8',
+    ratingNum: '4.5',
     type: 'Apartment',
     rooms: '3 Bedrooms',
     capacity: 'Max 4 adults',
