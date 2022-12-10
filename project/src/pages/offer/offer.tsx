@@ -41,8 +41,8 @@ export default function Offer(): JSX.Element {
         <section className='property'>
           <div className='property__gallery-container container'>
             <div className='property__gallery'>
-              {property.images.map((photo, i) => (
-                <div className='property__image-wrapper' key={`photo-${i}`}>
+              {property.images.map((photo) => (
+                <div className='property__image-wrapper' key={photo}>
                   <img
                     className='property__image'
                     src={photo}
@@ -89,8 +89,8 @@ export default function Offer(): JSX.Element {
               <div className='property__inside'>
                 <h2 className='property__inside-title'>What&apos;s inside</h2>
                 <ul className='property__inside-list'>
-                  {property.goods.map((feature, i) => (
-                    <li className='property__inside-item' key={`feature-${i}`}>
+                  {property.goods.map((feature) => (
+                    <li className='property__inside-item' key={feature}>
                       {feature}
                     </li>
                   ))}
