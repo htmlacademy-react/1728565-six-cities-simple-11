@@ -48,13 +48,6 @@ export type ReviewObjectType = {
   dateTime: string;
 };
 
-export type City = {
-  title: string;
-  lat: number;
-  lng: number;
-  zoom: number;
-};
-
 export interface Point extends Coordinates {
   title: string;
 }

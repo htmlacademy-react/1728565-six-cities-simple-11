@@ -1,31 +1,34 @@
 import { selectCity } from '../../store/action';
-import { City } from '../../types/types';
+// import { getCitiesList } from '../../store/reducer';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { Link } from 'react-router-dom';
 
-export default function Tabs(props: {cities: City[]}): JSX.Element {
-  const {cities} = props;
+import { City } from '../../types/city';
+import { CITIES } from '../../const';
 
+export default function Tabs(): JSX.Element {
   const activeCity = useAppSelector((state) => state.city);
   const dispatch = useAppDispatch();
 
-  const onCityClick = (cityname: string) => {
-    dispatch(selectCity({city: cityname}));
+  const cities = CITIES;
+
+  const onCityClick = (city: City) => {
+    dispatch(selectCity(city));
   };
 
   return (
-    <div className="tabs">
-      <section className="locations container">
-        <ul className="locations__list tabs__list">
+    <div className='tabs'>
+      <section className='locations container'>
+        <ul className='locations__list tabs__list'>
           {
             cities.map((city)=> (
-              <li className="locations__item" key={city.title}>
+              <li className='locations__item' key={city.name}>
                 <Link
-                  className={`locations__item-link tabs__item ${city.title === activeCity ? 'tabs__item--active' : ''}`}
+                  className={`locations__item-link tabs__item ${city.name === activeCity.name ? 'tabs__item--active' : ''}`}
                   to={''}
-                  onClick={() => onCityClick(city.title)}
+                  onClick={() => onCityClick(city)}
                 >
-                  <span>{city.title}</span>
+                  <span>{city.name}</span>
                 </Link>
               </li>
             ))

@@ -24,7 +24,7 @@ export default function Sort(): JSX.Element {
     }
 
     // console.log(clickedSortId);
-    dispatch(sortOffers({ sort: clickedSort }));
+    dispatch(sortOffers(clickedSort));
     // setIsOpened(false);
   };
 

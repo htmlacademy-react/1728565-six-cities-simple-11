@@ -1,28 +1,32 @@
-import { OfferObjectType } from '../../types/types';
+// import { OfferObjectType } from '../../types/types';
 import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
+import { Hotel } from '../../types/hotels';
 
 export default function OfferCard(props: {
-  offer: OfferObjectType;
+  offer: Hotel;
   className: string;
-  setHoveredCardActive: (offer: OfferObjectType) => void;
+  setHoveredCardActive: (offer: Hotel) => void;
+  getClickedOffer: (offer: Hotel) => void;
 }): JSX.Element {
-  const { offer, className, setHoveredCardActive } = props;
+  const { offer, className, setHoveredCardActive, getClickedOffer } = props;
 
   return (
     <article
       className={`${className} place-card`}
       onMouseEnter={() => setHoveredCardActive(offer)}
+      onClick={() => getClickedOffer(offer)}
     >
-      {offer.placeMark && (
+      {offer.isPremium && (
         <div className='place-card__mark'>
-          <span>{offer.placeMark}</span>
+          <span>Premium</span>
         </div>
       )}
       <div className='cities__image-wrapper place-card__image-wrapper'>
-        <Link to={`offer/${offer.id}`}>
+        <Link to={`${AppRoute.Offer}/${offer.id}`}>
           <img
             className='place-card__image'
-            src={offer.photoGallery[0]}
+            src={offer.previewImage}
             width='260'
             height='200'
             alt='Place image'
@@ -38,12 +42,12 @@ export default function OfferCard(props: {
         </div>
         <div className='place-card__rating rating'>
           <div className='place-card__stars rating__stars'>
-            <span style={{ width: offer.ratingStars }}></span>
+            <span style={{ width: offer.rating }}></span>
             <span className='visually-hidden'>Rating</span>
           </div>
         </div>
         <h2 className='place-card__name'>
-          <a href={`offer/${offer.id}`}>{offer.name}</a>
+          <a href={`${AppRoute.Offer}/${offer.id}`}>{offer.title}</a>
         </h2>
         <p className='place-card__type'>{offer.type}</p>
       </div>
