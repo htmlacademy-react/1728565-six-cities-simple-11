@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { createReducer, createSelector } from '@reduxjs/toolkit';
 import { selectCity, sortOffers, getHotels, requireAuthorization, setDataLoadingStatus, saveUserCredentials, getOffer } from './action';
 // import { offers } from '../mocks/offers';
@@ -65,7 +66,9 @@ const getNearOffersList = (offer: Hotel, offersList: Hotels) => {
   const nearOffers: Hotels = [];
   offersList.forEach((offerItem) => {
     if (nearOffers.length < 3) {
-      nearOffers.push(offerItem);
+      if (offer.id !== offerItem.id) {
+        nearOffers.push(offerItem);
+      }
     }
   });
   return nearOffers;

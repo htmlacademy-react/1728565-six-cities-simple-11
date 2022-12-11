@@ -4,13 +4,13 @@ import { Icon, Marker } from 'leaflet';
 import useMap from '../../hooks/useMap';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const';
 import 'leaflet/dist/leaflet.css';
-import { Hotel, Hotels } from '../../types/hotels';
+import { Hotels } from '../../types/hotels';
 import { City } from '../../types/city';
 
 type MapProps = {
   city: City;
   offers: Hotels | undefined;
-  selectedPoint: Hotel | undefined;
+  selectedPoints: Hotels | undefined;
 };
 
 const defaultCustomIcon = new Icon({
@@ -26,12 +26,20 @@ const currentCustomIcon = new Icon({
 });
 
 export default function Map(props: MapProps & ClassNameType) {
-  const { city, offers, selectedPoint, className } = props;
+  const { city, offers, selectedPoints, className } = props;
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
+  map?.setView([city.location.latitude, city.location.longitude], 12);
+
   useEffect(() => {
     if (map && offers) {
+      map.eachLayer((layer) => {
+        if (layer instanceof Marker) {
+          map.removeLayer(layer);
+        }
+      });
+
       offers.forEach((offer) => {
         const marker = new Marker({
           lat: offer.location.latitude,
@@ -40,14 +48,14 @@ export default function Map(props: MapProps & ClassNameType) {
 
         marker
           .setIcon(
-            selectedPoint !== undefined && offer.title === selectedPoint.title
+            (selectedPoints !== undefined && selectedPoints.find((selectedPoint) => selectedPoint.title === offer.title ))
               ? currentCustomIcon
               : defaultCustomIcon
           )
           .addTo(map);
       });
     }
-  }, [map, offers, selectedPoint]);
+  }, [map, offers, selectedPoints]);
 
   return <section className={`${className} map`} ref={mapRef}></section>;
 }

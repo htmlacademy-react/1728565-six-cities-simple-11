@@ -7,15 +7,16 @@ import { AppRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getOffer } from '../../store/action';
 import { getNearOffers } from '../../store/reducer';
-import { Hotel } from '../../types/hotels';
+import { Hotel, Hotels } from '../../types/hotels';
 
 export default function Offer(): JSX.Element {
-  const [selectedPoint, setSelectedPoint] = useState<Hotel | undefined>(
-    undefined
-  );
   const dispatch = useAppDispatch();
   const property = useAppSelector((store) => store.offer);
   const nearOffers = useAppSelector(getNearOffers);
+
+  const [selectedPoints, setSelectedPoints] = useState<Hotels | undefined>(
+    property ? [property] : undefined
+  );
 
   if (property === undefined) {
     return <Navigate to={AppRoute.Root} />;
@@ -29,8 +30,13 @@ export default function Offer(): JSX.Element {
     return offers;
   };
 
-  const setHoveredCardActive = (offer: Hotel) => {
-    setSelectedPoint(offer);
+  const setHoveredCardActive = (hoveredOffers: Hotels) => {
+    setSelectedPoints(hoveredOffers.concat(property));
+  };
+
+  const resetActiveCard = () => {
+    setSelectedPoints(undefined);
+    setSelectedPoints([property]);
   };
 
   const getClickedOffer = (offer: Hotel) => {
@@ -129,7 +135,7 @@ export default function Offer(): JSX.Element {
             className='property__map'
             city={property.city}
             offers={getMapOffers()}
-            selectedPoint={selectedPoint}
+            selectedPoints={selectedPoints}
           />
         </section>
         <div className='container'>
@@ -145,6 +151,7 @@ export default function Offer(): JSX.Element {
                     offer={nearOffer}
                     key={nearOffer.id}
                     setHoveredCardActive={setHoveredCardActive}
+                    resetActiveCard={resetActiveCard}
                     getClickedOffer={getClickedOffer}
                   />
                 ))}
