@@ -1,25 +1,34 @@
-import { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
 import OfferCard from '../../components/offer-card/offer-card';
-import { AppRoute } from '../../const';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getOffer } from '../../store/action';
-import { getNearOffers } from '../../store/reducer';
-import { Hotel, Hotels } from '../../types/hotels';
+import { useAppSelector } from '../../hooks';
+import { store } from '../../store';
+import { fetchHotelAction } from '../../store/api-actions';
+import { getHotelData } from '../../store/reducer';
+import { Hotels } from '../../types/hotels';
+import LoadingScreen from '../loading-screen/loading-screen';
 
 export default function Offer(): JSX.Element {
-  const dispatch = useAppDispatch();
-  const property = useAppSelector((store) => store.offer);
-  const nearOffers = useAppSelector(getNearOffers);
+
+  const params = useParams();
+  useEffect(() => {
+    store.dispatch(fetchHotelAction(Number(params.id)));
+    // store.dispatch(fetchNearHotelsAction(Number(params.id)));
+  },[params.id]);
+
+  const property = useAppSelector(getHotelData);
+  const nearOffers = useAppSelector((state) => state.nearHotels);
 
   const [selectedPoints, setSelectedPoints] = useState<Hotels | undefined>(
     property ? [property] : undefined
   );
 
-  if (property === undefined) {
-    return <Navigate to={AppRoute.Root} />;
+  if (!property) {
+    return (
+      <LoadingScreen />
+    );
   }
 
   const getMapOffers = () => {
@@ -37,10 +46,6 @@ export default function Offer(): JSX.Element {
   const resetActiveCard = () => {
     setSelectedPoints(undefined);
     setSelectedPoints([property]);
-  };
-
-  const getClickedOffer = (offer: Hotel) => {
-    dispatch(getOffer(offer));
   };
 
   return (
@@ -152,7 +157,6 @@ export default function Offer(): JSX.Element {
                     key={nearOffer.id}
                     setHoveredCardActive={setHoveredCardActive}
                     resetActiveCard={resetActiveCard}
-                    getClickedOffer={getClickedOffer}
                   />
                 ))}
             </div>

@@ -1,19 +1,19 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { store } from '.';
-import { APIRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../const';
+import { APIRoute, AppRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../const';
 import { dropToken, saveToken } from '../services/token';
 import { AuthData } from '../types/auth-data';
-import { Hotels } from '../types/hotels';
+import { Hotel, Hotels } from '../types/hotels';
 import { AppDispatch, State } from '../types/state';
 import { UserData } from '../types/user-data';
-import { getHotels, requireAuthorization, saveUserCredentials, setDataLoadingStatus, setError } from './action';
+import { getHotel, getHotels, redirectToRoute, requireAuthorization, saveUserCredentials, setDataLoadingStatus, setError } from './action';
 
 export const clearErrorAction = createAsyncThunk('data/clearError', () => {
   setTimeout(() => store.dispatch(setError(null)), TIMEOUT_SHOW_ERROR);
 });
 
-export const fetchHotelAction = createAsyncThunk<
+export const fetchHotelsAction = createAsyncThunk<
   void,
   undefined,
   {
@@ -24,9 +24,45 @@ export const fetchHotelAction = createAsyncThunk<
 >('data/fetchHotels', async (_arg, { dispatch, extra: api }) => {
   dispatch(setDataLoadingStatus(true));
   const { data } = await api.get<Hotels>(APIRoute.Hotels);
-  dispatch(setDataLoadingStatus(false));
   dispatch(getHotels(data));
+  dispatch(setDataLoadingStatus(false));
 });
+
+export const fetchHotelAction = createAsyncThunk<
+  void,
+  number,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>('data/fetchHotel', async (id, { dispatch, extra: api }) => {
+  try {
+    dispatch(setDataLoadingStatus(true));
+    const { data } = await api.get<Hotel>(`${APIRoute.Hotels}/${id}`);
+    dispatch(getHotel(data));
+    dispatch(setDataLoadingStatus(false));
+  } catch {
+    dispatch(getHotel(null));
+    dispatch(setDataLoadingStatus(false));
+    dispatch(redirectToRoute(AppRoute.NotFound));
+  }
+});
+
+// export const fetchNearHotelsAction = createAsyncThunk<
+//   Hotels,
+//   number,
+//   {
+//     dispatch: AppDispatch;
+//     state: State;
+//     extra: AxiosInstance;
+//   }
+// >('data/fetchHotel', async (id, { dispatch, extra: api }) => {
+//   // dispatch(setDataLoadingStatus(true));
+//   // const { data } = await api.get<Hotels>(`${APIRoute.Hotels}/${id}/nearby`);
+//   // dispatch(getNearHotels(data));
+//   // dispatch(setDataLoadingStatus(false));
+// });
 
 export const checkAuthAction = createAsyncThunk<
   void,

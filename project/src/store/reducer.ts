@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { createReducer, createSelector } from '@reduxjs/toolkit';
-import { selectCity, sortOffers, getHotels, requireAuthorization, setDataLoadingStatus, saveUserCredentials, getOffer } from './action';
+import { selectCity, sortOffers, getHotels, requireAuthorization, setDataLoadingStatus, saveUserCredentials, getHotel } from './action';
 // import { offers } from '../mocks/offers';
 // import { OfferObjectType } from '../types/types';
 import { AuthorizationStatus, CITY, SortTypes } from '../const';
@@ -16,11 +16,12 @@ type InitialState = {
   sorting: Sorting[];
   sort: string;
   hotels: Hotels;
-  offer: Hotel | undefined;
+  hotel: Hotel | null;
+  nearHotels: Hotels | null;
   authorizationStatus: AuthorizationStatus;
   userEmail: string | null;
   error: string | null;
-  isQuestionsDataLoading: boolean;
+  isHotelsDataLoading: boolean;
 }
 
 type Sorting = {
@@ -33,20 +34,21 @@ const initialState: InitialState = {
   sorting: SORTING,
   sort: 'Popular',
   hotels: [],
-  offer: undefined,
+  hotel: null,
+  nearHotels: null,
   authorizationStatus: AuthorizationStatus.Unknown,
   userEmail: null,
   error: null,
-  isQuestionsDataLoading: false,
+  isHotelsDataLoading: true,
 };
 
 export const getAuthorizationStatus = (state: State): AuthorizationStatus => state.authorizationStatus;
 export const getUserEmail = (state: State): string | null => state.userEmail;
 
-export const getOffers = (state: State): Hotels => state.hotels;
+export const getHotelsData = (state: State): Hotels => state.hotels;
 export const getCity = (state: State): string => state.city.name;
 export const getSort = (state: State): string => state.sort;
-export const getOfferData = (state: State): Hotel | undefined => state.offer;
+export const getHotelData = (state: State): Hotel | null => state.hotel;
 
 
 const getSortedOffers = (offersList: Hotels, sortType: string) => {
@@ -62,20 +64,8 @@ const getSortedOffers = (offersList: Hotels, sortType: string) => {
   }
 };
 
-const getNearOffersList = (offer: Hotel, offersList: Hotels) => {
-  const nearOffers: Hotels = [];
-  offersList.forEach((offerItem) => {
-    if (nearOffers.length < 3) {
-      if (offer.id !== offerItem.id) {
-        nearOffers.push(offerItem);
-      }
-    }
-  });
-  return nearOffers;
-};
-
 export const getFilteredOffers = createSelector(
-  getOffers,
+  getHotelsData,
   getCity,
   getSort,
   (offers, city, sort) => {
@@ -84,35 +74,22 @@ export const getFilteredOffers = createSelector(
   }
 );
 
-export const getNearOffers = createSelector(
-  getOfferData,
-  getOffers,
-  getCity,
-  (offer, offers, city) => {
-    if (offer === undefined) {
-      return;
-    }
-    const filteredOffers = offers.filter((offerItem) => offerItem.city.name === city);
-    return getNearOffersList(offer, filteredOffers);
-  }
-);
-
 export const reducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(selectCity, (state, action) => {
-      state.city = action.payload;
-    })
     .addCase(getHotels, (state, action) => {
       state.hotels = action.payload;
+    })
+    .addCase(getHotel, (state, action) => {
+      state.hotel = action.payload;
+    })
+    .addCase(selectCity, (state, action) => {
+      state.city = action.payload;
     })
     .addCase(sortOffers, (state, action) => {
       state.sort = action.payload;
     })
-    .addCase(getOffer, (state, action) => {
-      state.offer = action.payload;
-    })
     .addCase(setDataLoadingStatus, (state, action) => {
-      state.isQuestionsDataLoading = action.payload;
+      state.isHotelsDataLoading = action.payload;
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;

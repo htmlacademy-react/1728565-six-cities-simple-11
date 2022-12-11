@@ -8,16 +8,14 @@ export default function OfferCard(props: {
   className: string;
   setHoveredCardActive: (hoveredOffers: Hotels) => void;
   resetActiveCard: () => void;
-  getClickedOffer: (offer: Hotel) => void;
 }): JSX.Element {
-  const { offer, className, setHoveredCardActive, resetActiveCard, getClickedOffer } = props;
+  const { offer, className, setHoveredCardActive, resetActiveCard } = props;
 
   return (
     <article
       className={`${className} place-card`}
       onMouseEnter={() => setHoveredCardActive([offer])}
       onMouseLeave={() => resetActiveCard()}
-      onClick={() => getClickedOffer(offer)}
     >
       {offer.isPremium && (
         <div className='place-card__mark'>
