@@ -1,4 +1,4 @@
-export type ClassNameType = {className: string};
+export type ClassNameType = { className: string };
 
 export type PlaceCardObjectType = {
   id: number;
@@ -10,7 +10,6 @@ export type PlaceCardObjectType = {
   placeType: string;
   placeLink: string;
 };
-
 
 export type OfferObjectType = {
   id: string;
@@ -38,7 +37,7 @@ export type OfferObjectType = {
 export type Coordinates = {
   lat: number;
   lng: number;
-}
+};
 
 export type ReviewObjectType = {
   author: string;
@@ -52,4 +51,4 @@ export interface Point extends Coordinates {
   title: string;
 }
 
-export type Points = Point [];
+export type Points = Point[];

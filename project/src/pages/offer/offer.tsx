@@ -1,37 +1,51 @@
-import { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
 import OfferCard from '../../components/offer-card/offer-card';
-import { AppRoute } from '../../const';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getOffer } from '../../store/action';
-import { getNearOffers } from '../../store/reducer';
-import { Hotel } from '../../types/hotels';
+import { useAppSelector } from '../../hooks';
+import { store } from '../../store';
+import { fetchHotelAction } from '../../store/api-actions';
+import { getHotelData } from '../../store/reducer';
+import { Hotels } from '../../types/hotels';
+import LoadingScreen from '../loading-screen/loading-screen';
 
 export default function Offer(): JSX.Element {
-  const [selectedPoint, setSelectedPoint] = useState<Hotel | undefined>(
-    undefined
+
+  const params = useParams();
+  useEffect(() => {
+    store.dispatch(fetchHotelAction(Number(params.id)));
+    // store.dispatch(fetchNearHotelsAction(Number(params.id)));
+  },[params.id]);
+
+  const property = useAppSelector(getHotelData);
+  const nearOffers = useAppSelector((state) => state.nearHotels);
+
+  const [selectedPoints, setSelectedPoints] = useState<Hotels | undefined>(
+    property ? [property] : undefined
   );
-  const dispatch = useAppDispatch();
-  const property = useAppSelector((store) => store.offer);
-  const nearOffers = useAppSelector(getNearOffers);
+
+  if (!property) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   const getMapOffers = () => {
     const offers = [property];
+    if (nearOffers) {
+      return offers.concat(nearOffers);
+    }
     return offers;
   };
 
-  if (property === null) {
-    return <Navigate to={AppRoute.Root} />;
-  }
-
-  const setHoveredCardActive = (offer: Hotel) => {
-    setSelectedPoint(offer);
+  const setHoveredCardActive = (hoveredOffers: Hotels) => {
+    setSelectedPoints(hoveredOffers.concat(property));
   };
 
-  const getClickedOffer = (offer: Hotel) => {
-    dispatch(getOffer(offer));
+  const resetActiveCard = () => {
+    setSelectedPoints(undefined);
+    setSelectedPoints([property]);
   };
 
   return (
@@ -126,7 +140,7 @@ export default function Offer(): JSX.Element {
             className='property__map'
             city={property.city}
             offers={getMapOffers()}
-            selectedPoint={selectedPoint}
+            selectedPoints={selectedPoints}
           />
         </section>
         <div className='container'>
@@ -142,7 +156,7 @@ export default function Offer(): JSX.Element {
                     offer={nearOffer}
                     key={nearOffer.id}
                     setHoveredCardActive={setHoveredCardActive}
-                    getClickedOffer={getClickedOffer}
+                    resetActiveCard={resetActiveCard}
                   />
                 ))}
             </div>

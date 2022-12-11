@@ -1,21 +1,21 @@
 // import { OfferObjectType } from '../../types/types';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { Hotel } from '../../types/hotels';
+import { Hotel, Hotels } from '../../types/hotels';
 
 export default function OfferCard(props: {
   offer: Hotel;
   className: string;
-  setHoveredCardActive: (offer: Hotel) => void;
-  getClickedOffer: (offer: Hotel) => void;
+  setHoveredCardActive: (hoveredOffers: Hotels) => void;
+  resetActiveCard: () => void;
 }): JSX.Element {
-  const { offer, className, setHoveredCardActive, getClickedOffer } = props;
+  const { offer, className, setHoveredCardActive, resetActiveCard } = props;
 
   return (
     <article
       className={`${className} place-card`}
-      onMouseEnter={() => setHoveredCardActive(offer)}
-      onClick={() => getClickedOffer(offer)}
+      onMouseEnter={() => setHoveredCardActive([offer])}
+      onMouseLeave={() => resetActiveCard()}
     >
       {offer.isPremium && (
         <div className='place-card__mark'>
@@ -47,7 +47,7 @@ export default function OfferCard(props: {
           </div>
         </div>
         <h2 className='place-card__name'>
-          <a href={`${AppRoute.Offer}/${offer.id}`}>{offer.title}</a>
+          <Link to={`${AppRoute.Offer}/${offer.id}`}>{offer.title}</Link>
         </h2>
         <p className='place-card__type'>{offer.type}</p>
       </div>
