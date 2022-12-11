@@ -4,7 +4,9 @@ import Logo from '../../components/logo/logo';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
-import { getAuthorizationStatus } from '../../store/reducer';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+
+
 import { AuthData } from '../../types/auth-data';
 
 export default function Login(): JSX.Element {

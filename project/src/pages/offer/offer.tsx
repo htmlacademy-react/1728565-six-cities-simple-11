@@ -3,26 +3,27 @@ import { useParams } from 'react-router-dom';
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
 import OfferCard from '../../components/offer-card/offer-card';
-import { useAppSelector } from '../../hooks';
-import { store } from '../../store';
-import { fetchHotelAction } from '../../store/api-actions';
-import { getHotelData } from '../../store/reducer';
-import { Hotels } from '../../types/hotels';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchNearOffersAction, fetchOfferAction } from '../../store/api-actions';
+import { getNearOffersData, getOfferData } from '../../store/offers-data/selectors';
+import { OffersType } from '../../types/offers';
+
 import LoadingScreen from '../loading-screen/loading-screen';
 
 export default function Offer(): JSX.Element {
 
   const params = useParams();
+  const dispatch = useAppDispatch();
   useEffect(() => {
-    store.dispatch(fetchHotelAction(Number(params.id)));
-    // store.dispatch(fetchNearHotelsAction(Number(params.id)));
+    dispatch(fetchOfferAction(Number(params.id)));
+    dispatch(fetchNearOffersAction(Number(params.id)));
   },[params.id]);
 
-  const property = useAppSelector(getHotelData);
-  const nearOffers = useAppSelector((state) => state.nearHotels);
+  const property = useAppSelector(getOfferData);
+  const nearOffers = useAppSelector(getNearOffersData);
 
-  const [selectedPoints, setSelectedPoints] = useState<Hotels | undefined>(
-    property ? [property] : undefined
+  const [selectedPoints, setSelectedPoints] = useState<OffersType | null>(
+    property ? [property] : null
   );
 
   if (!property) {
@@ -39,12 +40,12 @@ export default function Offer(): JSX.Element {
     return offers;
   };
 
-  const setHoveredCardActive = (hoveredOffers: Hotels) => {
+  const setHoveredCardActive = (hoveredOffers: OffersType) => {
     setSelectedPoints(hoveredOffers.concat(property));
   };
 
   const resetActiveCard = () => {
-    setSelectedPoints(undefined);
+    setSelectedPoints(null);
     setSelectedPoints([property]);
   };
 

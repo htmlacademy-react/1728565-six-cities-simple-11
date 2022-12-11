@@ -2,12 +2,14 @@ import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logoutAction } from '../../store/api-actions';
-import { getAuthorizationStatus } from '../../store/reducer';
+import { getAuthorizationStatus, getUserEmail } from '../../store/user-process/selectors';
+
+
 import Logo from '../logo/logo';
 
 export default function Header(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
-  const userEmail = useAppSelector((state) => state.userEmail);
+  const userEmail = useAppSelector(getUserEmail);
   const dispatch = useAppDispatch();
   const onLogout = () => {
     dispatch(logoutAction());
