@@ -33,3 +33,15 @@ export const getFilteredOffers = createSelector(
     return getSortedOffers(filteredOffers, sort);
   }
 );
+
+export const calcRating = (rating: number) => `${(rating / 5 * 100).toString()}%`;
+
+export const parseDate = (date: string, datetime = true ) => {
+  const utcDate = new Date(date);
+  const fullMonthNum = (utcDate.getMonth() + 1) < 10 ? `0${(utcDate.getMonth() + 1)}` : (utcDate.getMonth() + 1);
+  const fullMonthText = utcDate.toLocaleString('default', { month: 'long' });
+
+  const dateTime = `${utcDate.getFullYear()}-${fullMonthNum}-${utcDate.getDate()}`;
+  const dateString = `${fullMonthText} ${utcDate.getFullYear()}`;
+  return datetime ? dateTime : dateString;
+};

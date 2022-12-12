@@ -3,36 +3,42 @@ import { useParams } from 'react-router-dom';
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
 import OfferCard from '../../components/offer-card/offer-card';
+import Reviews from '../../components/reviews/reviews';
 import { useAppSelector } from '../../hooks';
 import { store } from '../../store';
-import { fetchNearOffersAction, fetchOfferAction } from '../../store/api-actions';
-import { getNearOffersData, getOfferData } from '../../store/offers-data/selectors';
+import {
+  fetchNearOffersAction,
+  fetchOfferAction,
+  fetchReviewsAction,
+} from '../../store/api-actions';
+import { calcRating } from '../../store/app-process/selectors';
+import {
+  getNearOffersData,
+  getOfferData,
+} from '../../store/offers-data/selectors';
 import { OffersType } from '../../types/offers';
 
 import LoadingScreen from '../loading-screen/loading-screen';
 
 export default function Offer(): JSX.Element {
-
   const params = useParams();
-  // const dataIsLoading = useAppSelector(getDataLoadingState);
-
   const property = useAppSelector(getOfferData);
   const nearOffers = useAppSelector(getNearOffersData);
+
   useEffect(() => {
     if (property === null || property.id !== Number(params.id)) {
       store.dispatch(fetchOfferAction(Number(params.id)));
       store.dispatch(fetchNearOffersAction(Number(params.id)));
+      store.dispatch(fetchReviewsAction(Number(params.id)));
     }
-  },[params.id, property]);
+  }, [params.id, property]);
 
   const [selectedPoints, setSelectedPoints] = useState<OffersType | null>(
     property ? [property] : null
   );
 
   if (!property) {
-    return (
-      <LoadingScreen />
-    );
+    return <LoadingScreen />;
   }
 
   const getMapOffers = () => {
@@ -82,7 +88,8 @@ export default function Offer(): JSX.Element {
               </div>
               <div className='property__rating rating'>
                 <div className='property__stars rating__stars'>
-                  <span style={{ width: property.rating }}></span>
+                  {/* <span style={{ width: property.rating }}></span> */}
+                  <span style={{ width: calcRating(property.rating) }}></span>
                   <span className='visually-hidden'>Rating</span>
                 </div>
                 <span className='property__rating-value rating__value'>
@@ -138,7 +145,7 @@ export default function Offer(): JSX.Element {
                 </div>
               </div>
             </div>
-            {/* <Reviews reviews={reviews}/> */}
+            <Reviews />
           </div>
           <Map
             className='property__map'

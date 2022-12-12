@@ -1,3 +1,4 @@
+import { calcRating, parseDate } from '../../store/app-process/selectors';
 import { ReviewType } from '../../types/review';
 
 export default function Review(props: { review: ReviewType }): JSX.Element {
@@ -20,13 +21,13 @@ export default function Review(props: { review: ReviewType }): JSX.Element {
       <div className='reviews__info'>
         <div className='reviews__rating rating'>
           <div className='reviews__stars rating__stars'>
-            <span style={{ width: review.rating }}></span>
+            <span style={{ width: calcRating(review.rating) }}></span>
             <span className='visually-hidden'>Rating</span>
           </div>
         </div>
         <p className='reviews__text'>{review.comment}</p>
-        <time className='reviews__time' dateTime={review.date}>
-          {review.date}
+        <time className='reviews__time' dateTime={parseDate(review.date)}>
+          {parseDate(review.date, false)}
         </time>
       </div>
     </>
