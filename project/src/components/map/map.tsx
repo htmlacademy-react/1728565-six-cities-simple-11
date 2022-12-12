@@ -48,7 +48,7 @@ export default function Map(props: MapProps & ClassNameType) {
 
         marker
           .setIcon(
-            (selectedPoints !== null && selectedPoints.find((selectedPoint) => selectedPoint.title === offer.title ))
+            (selectedPoints !== null && selectedPoints.find((selectedPoint) => selectedPoint.id === offer.id ))
               ? currentCustomIcon
               : defaultCustomIcon
           )

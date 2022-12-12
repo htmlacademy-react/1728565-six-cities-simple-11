@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { OffersData } from '../../types/state';
 import { fetchOffersAction, fetchOfferAction, fetchNearOffersAction, fetchReviewsAction } from '../api-actions';
@@ -14,7 +14,11 @@ const initialState: OffersData = {
 export const offersData = createSlice({
   name: NameSpace.Offers,
   initialState,
-  reducers: {},
+  reducers: {
+    setDataLoadingState: (state, action: PayloadAction<boolean>) => {
+      state.isDataLoading = action.payload;
+    }
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchOffersAction.pending, (state) => {
@@ -46,3 +50,5 @@ export const offersData = createSlice({
       });
   }
 });
+
+export const {setDataLoadingState} = offersData.actions;
