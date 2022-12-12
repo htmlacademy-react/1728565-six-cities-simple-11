@@ -4,17 +4,17 @@ import OfferCard from '../offer-card/offer-card';
 import Sort from '../sort/sort';
 import { useState } from 'react';
 import { OffersType } from '../../types/offers';
-import { getCity, getFilteredOffers } from '../../store/app-process/selectors';
+import { getCity } from '../../store/app-process/selectors';
+import MainEmpty from '../main-empty/main-empty';
 
-export default function Offers(): JSX.Element {
+export default function Offers(props: {offers: OffersType}): JSX.Element {
+  const { offers } = props;
+
   const [selectedPoints, setSelectedPoints] = useState<OffersType | null>(
     null
   );
 
-  // const dispatch = useAppDispatch();
-
   const selectedCity = useAppSelector(getCity);
-  const offers = useAppSelector(getFilteredOffers);
 
   const setHoveredCardActive = (hoveredOffers: OffersType) => {
     setSelectedPoints(hoveredOffers);
@@ -24,30 +24,30 @@ export default function Offers(): JSX.Element {
     setSelectedPoints(null);
   };
 
-  // const getClickedOffer = (offer: Offer) => {
-  //   dispatch(getOffer(offer));
-  // };
-
   return (
     <div className='cities'>
-      <div className='cities__places-container container'>
-        <section className='cities__places places'>
-          <h2 className='visually-hidden'>Places</h2>
-          <b className='places__found'>{offers.length} places to stay in {selectedCity.name}</b>
-          <Sort />
-          <div className='cities__places-list places__list tabs__content'>
-            {offers.map((offer) => (
-              <OfferCard
-                className='cities__card'
-                offer={offer}
-                key={`offercard-${offer.id}`}
-                setHoveredCardActive={setHoveredCardActive}
-                resetActiveCard={resetActiveCard}
-                // getClickedOffer={getClickedOffer}
-              />
-            ))}
-          </div>
-        </section>
+      <div className={`cities__places-container container ${offers.length ? 'cities__places-container--empty' : ''}`}>
+        {
+          offers.length ?
+            <section className='cities__places places'>
+              <h2 className='visually-hidden'>Places</h2>
+              <b className='places__found'>{offers.length} places to stay in {selectedCity.name}</b>
+              <Sort />
+              <div className='cities__places-list places__list tabs__content'>
+                {offers.map((offer) => (
+                  <OfferCard
+                    className='cities__card'
+                    offer={offer}
+                    key={`offercard-${offer.id}`}
+                    setHoveredCardActive={setHoveredCardActive}
+                    resetActiveCard={resetActiveCard}
+                  />
+                ))}
+              </div>
+            </section>
+            :
+            <MainEmpty city={selectedCity}/>
+        }
         <div className='cities__right-section'>
           <Map
             className='cities__map'

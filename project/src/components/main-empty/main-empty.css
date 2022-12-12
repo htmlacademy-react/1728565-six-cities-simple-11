@@ -1,0 +1,12 @@
+.cities__no-places {
+  z-index: 1;
+}
+
+.cities__no-places::after {
+  right: -63px;
+  max-width: 160px;
+}
+
+.cities__no-places +.cities__right-section {
+  z-index: 0;
+}
