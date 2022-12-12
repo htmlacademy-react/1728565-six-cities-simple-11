@@ -9,12 +9,11 @@ import MainEmpty from '../main-empty/main-empty';
 
 export default function Offers(props: {offers: OffersType}): JSX.Element {
   const { offers } = props;
+  const selectedCity = useAppSelector(getCity);
 
   const [selectedPoints, setSelectedPoints] = useState<OffersType | null>(
     null
   );
-
-  const selectedCity = useAppSelector(getCity);
 
   const setHoveredCardActive = (hoveredOffers: OffersType) => {
     setSelectedPoints(hoveredOffers);

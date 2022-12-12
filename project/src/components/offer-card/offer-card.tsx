@@ -1,6 +1,7 @@
 // import { OfferObjectType } from '../../types/types';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
+import { calcRating } from '../../store/app-process/selectors';
 import { OffersType, OfferType } from '../../types/offers';
 
 
@@ -43,7 +44,7 @@ export default function OfferCard(props: {
         </div>
         <div className='place-card__rating rating'>
           <div className='place-card__stars rating__stars'>
-            <span style={{ width: offer.rating }}></span>
+            <span style={{ width: calcRating(offer.rating) }}></span>
             <span className='visually-hidden'>Rating</span>
           </div>
         </div>

@@ -33,3 +33,5 @@ export const getFilteredOffers = createSelector(
     return getSortedOffers(filteredOffers, sort);
   }
 );
+
+export const calcRating = (rating: number) => `${(rating / 5 * 100).toString()}%`;
