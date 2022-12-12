@@ -1,6 +1,6 @@
 import { City } from './city';
 
-export type Hotel = {
+export type OfferType = {
   bedrooms: number;
   city: City;
   description: string;
@@ -27,4 +27,4 @@ export type Hotel = {
   type: string;
 };
 
-export type Hotels = Hotel[];
+export type OffersType = OfferType[];

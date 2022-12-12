@@ -11,12 +11,20 @@ export enum APIRoute {
   Hotels = '/Hotels',
   Login = '/login',
   Logout = '/logout',
+  Reviews = '/comments'
 }
 
 export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN'
+}
+
+export enum NameSpace {
+  App = 'APP',
+  User = 'USER',
+  Offers = 'OFFERS',
+  Comments = 'COMMENTS',
 }
 
 export const URL_MARKER_DEFAULT =
@@ -33,6 +41,8 @@ export enum SortTypes {
 }
 
 export const TIMEOUT_SHOW_ERROR = 2000;
+
+export const SORTLIST = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'];
 
 export const CITY: City = {
   name: 'Amsterdam',

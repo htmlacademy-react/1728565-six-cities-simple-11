@@ -1,13 +1,13 @@
-import { selectCity } from '../../store/action';
-// import { getCitiesList } from '../../store/reducer';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { Link } from 'react-router-dom';
 
 import { City } from '../../types/city';
 import { CITIES } from '../../const';
+import { getCity } from '../../store/app-process/selectors';
+import { selectCity } from '../../store/app-process/app-process';
 
 export default function Tabs(): JSX.Element {
-  const activeCity = useAppSelector((state) => state.city);
+  const activeCity = useAppSelector(getCity);
   const dispatch = useAppDispatch();
 
   const cities = CITIES;

@@ -8,20 +8,14 @@ import { useAppSelector } from '../../hooks';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import browserHistory from '../../browser-history';
 import HistoryRouter from '../history-route/history-route';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { getDataLoadingState } from '../../store/offers-data/selectors';
 
 function App(): JSX.Element {
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const isDataLoading = useAppSelector(getDataLoadingState);
 
-  const authorizationStatus = useAppSelector(
-    (state) => state.authorizationStatus
-  );
-  const isHotelsDataLoading = useAppSelector(
-    (state) => state.isHotelsDataLoading
-  );
-
-  if (
-    authorizationStatus === AuthorizationStatus.Unknown ||
-    isHotelsDataLoading
-  ) {
+  if (authorizationStatus === AuthorizationStatus.Unknown || isDataLoading) {
     return <LoadingScreen />;
   }
 
@@ -32,10 +26,7 @@ function App(): JSX.Element {
         <Route path={AppRoute.Login} element={<Login />} />
         <Route path={AppRoute.Offer}>
           <Route index element={<NotFound />} />
-          <Route
-            path=':id'
-            element={<Offer />}
-          />
+          <Route path=':id' element={<Offer />} />
         </Route>
         <Route path='*' element={<NotFound />} />
       </Routes>

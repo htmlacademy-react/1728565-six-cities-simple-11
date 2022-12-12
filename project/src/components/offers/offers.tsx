@@ -3,29 +3,28 @@ import Map from '../../components/map/map';
 import OfferCard from '../offer-card/offer-card';
 import Sort from '../sort/sort';
 import { useState } from 'react';
-// import { CITIES } from '../../mocks/cities';
-import { getFilteredOffers } from '../../store/reducer';
-import { Hotels } from '../../types/hotels';
+import { OffersType } from '../../types/offers';
+import { getCity, getFilteredOffers } from '../../store/app-process/selectors';
 
 export default function Offers(): JSX.Element {
-  const [selectedPoints, setSelectedPoints] = useState<Hotels | undefined>(
-    undefined
+  const [selectedPoints, setSelectedPoints] = useState<OffersType | null>(
+    null
   );
 
   // const dispatch = useAppDispatch();
 
-  const selectedCity = useAppSelector((state) => state.city);
+  const selectedCity = useAppSelector(getCity);
   const offers = useAppSelector(getFilteredOffers);
 
-  const setHoveredCardActive = (hoveredOffers: Hotels) => {
+  const setHoveredCardActive = (hoveredOffers: OffersType) => {
     setSelectedPoints(hoveredOffers);
   };
 
   const resetActiveCard = () => {
-    setSelectedPoints(undefined);
+    setSelectedPoints(null);
   };
 
-  // const getClickedOffer = (offer: Hotel) => {
+  // const getClickedOffer = (offer: Offer) => {
   //   dispatch(getOffer(offer));
   // };
 

@@ -1,9 +1,10 @@
-import { ReviewObjectType } from '../../types/types';
+import { useAppSelector } from '../../hooks';
+import { getReviewsData } from '../../store/offers-data/selectors';
 import Review from '../review/review';
 import UserReviewForm from '../userReviewForm/userReviewForm';
 
-export default function Reviews(props: {reviews: ReviewObjectType[]}): JSX.Element {
-  const {reviews} = props;
+export default function Reviews(): JSX.Element {
+  const reviews = useAppSelector(getReviewsData);
 
   return (
     <section className='property__reviews reviews'>
@@ -11,7 +12,7 @@ export default function Reviews(props: {reviews: ReviewObjectType[]}): JSX.Eleme
       <ul className='reviews__list'>
         {
           reviews.map((review) => (
-            <li className='reviews__item' key=''>
+            <li className='reviews__item' key={review.id}>
               <Review review={review}/>
             </li>
           ))

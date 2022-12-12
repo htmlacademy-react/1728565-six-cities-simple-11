@@ -1,12 +1,13 @@
 // import { OfferObjectType } from '../../types/types';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { Hotel, Hotels } from '../../types/hotels';
+import { OffersType, OfferType } from '../../types/offers';
+
 
 export default function OfferCard(props: {
-  offer: Hotel;
+  offer: OfferType;
   className: string;
-  setHoveredCardActive: (hoveredOffers: Hotels) => void;
+  setHoveredCardActive: (hoveredOffers: OffersType) => void;
   resetActiveCard: () => void;
 }): JSX.Element {
   const { offer, className, setHoveredCardActive, resetActiveCard } = props;

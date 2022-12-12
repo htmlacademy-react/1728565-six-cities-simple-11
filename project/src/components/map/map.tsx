@@ -4,13 +4,13 @@ import { Icon, Marker } from 'leaflet';
 import useMap from '../../hooks/useMap';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const';
 import 'leaflet/dist/leaflet.css';
-import { Hotels } from '../../types/hotels';
+import { OffersType } from '../../types/offers';
 import { City } from '../../types/city';
 
 type MapProps = {
   city: City;
-  offers: Hotels | undefined;
-  selectedPoints: Hotels | undefined;
+  offers: OffersType | null;
+  selectedPoints: OffersType | null;
 };
 
 const defaultCustomIcon = new Icon({
@@ -48,7 +48,7 @@ export default function Map(props: MapProps & ClassNameType) {
 
         marker
           .setIcon(
-            (selectedPoints !== undefined && selectedPoints.find((selectedPoint) => selectedPoint.title === offer.title ))
+            (selectedPoints !== null && selectedPoints.find((selectedPoint) => selectedPoint.id === offer.id ))
               ? currentCustomIcon
               : defaultCustomIcon
           )

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { sortOffers } from '../../store/action';
+import { sortOffers } from '../../store/app-process/app-process';
+import { getSort, getSortList } from '../../store/app-process/selectors';
 
 export default function Sort(): JSX.Element {
-  const sort = useAppSelector((state) => state.sort);
-  const sorting = useAppSelector((state) => state.sorting);
+  const sort = useAppSelector(getSort);
+  const sortList = useAppSelector(getSortList);
   const dispatch = useAppDispatch();
 
   const [isOpened, setIsOpened] = useState(false);
@@ -23,9 +24,7 @@ export default function Sort(): JSX.Element {
       return;
     }
 
-    // console.log(clickedSortId);
     dispatch(sortOffers(clickedSort));
-    // setIsOpened(false);
   };
 
   return (
@@ -53,15 +52,15 @@ export default function Sort(): JSX.Element {
           onMouseLeave={onHoverOut}
           onClick={onSortClick}
         >
-          {sorting.map((sortType) => (
+          {sortList.map((sortType) => (
             <li
               className={`places__option ${
-                sortType.name === sort ? 'places__option--active' : ''
+                sortType === sort ? 'places__option--active' : ''
               }`}
               tabIndex={0}
-              key={sortType.id}
+              key={sortType}
             >
-              {sortType.name}
+              {sortType}
             </li>
           ))}
         </ul>

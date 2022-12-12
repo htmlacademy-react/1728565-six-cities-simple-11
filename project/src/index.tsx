@@ -2,12 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
 import { Provider } from 'react-redux';
-import { store } from './store';
-import ErrorMessage from './components/error-message/error-message';
-import { checkAuthAction, fetchHotelsAction } from './store/api-actions';
 
-store.dispatch(fetchHotelsAction());
+import ErrorMessage from './components/error-message/error-message';
+import { checkAuthAction, fetchOffersAction } from './store/api-actions';
+import { store } from './store/index';
+
 store.dispatch(checkAuthAction());
+store.dispatch(fetchOffersAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
