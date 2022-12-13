@@ -4,7 +4,7 @@ export type OfferType = {
   bedrooms: number;
   city: City;
   description: string;
-  goods: [string];
+  goods: string[];
   host: {
     avatarUrl: string;
     id: number;
@@ -12,7 +12,7 @@ export type OfferType = {
     name: string;
   };
   id: number;
-  images: [string];
+  images: string[];
   isPremium: boolean;
   location: {
     latitude: number;

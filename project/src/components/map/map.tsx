@@ -57,5 +57,5 @@ export default function Map(props: MapProps & ClassNameType) {
     }
   }, [map, offers, selectedPoints]);
 
-  return <section className={`${className} map`} ref={mapRef}></section>;
+  return <section className={`${className} map`} ref={mapRef} data-testid="map"></section>;
 }

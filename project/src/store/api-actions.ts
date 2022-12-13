@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
-// import { store } from '.';
 import { APIRoute, AppRoute } from '../const';
 import { dropToken, saveToken } from '../services/token';
 import { AuthData } from '../types/auth-data';
@@ -9,7 +8,6 @@ import { ReviewsType } from '../types/review';
 import { AppDispatch, State } from '../types/state';
 import { UserData } from '../types/user-data';
 import { redirectToRoute } from './action';
-// import { setError } from './app-process/app-process';
 import { setUserCredentials } from './user-process/user-process';
 
 export const fetchOffersAction = createAsyncThunk<
@@ -113,6 +111,6 @@ export const logoutAction = createAsyncThunk<
   dispatch(setUserCredentials(null));
 });
 
-// export const clearErrorAction = createAsyncThunk('data/clearError', () => {
+// export const clearErrorAction = createAsyncThunk<void>('data/clearError', () => {
 //   setTimeout(() => store.dispatch(setError(null)), TIMEOUT_SHOW_ERROR);
 // });

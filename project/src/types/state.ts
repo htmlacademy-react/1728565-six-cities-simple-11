@@ -10,6 +10,7 @@ export type AppDispatch = typeof store.dispatch;
 
 export type UserProcess = {
   authorizationStatus: AuthorizationStatus;
+  userEmail: UserEmail;
 }
 
 export type AppProcess = {
@@ -19,9 +20,7 @@ export type AppProcess = {
   error: string | null;
 }
 
-export type UserEmail = {
-  userEmail: string | null;
-}
+export type UserEmail = string | null;
 
 export type OffersData = {
   offers: OffersType;
