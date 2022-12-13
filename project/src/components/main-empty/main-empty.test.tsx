@@ -12,6 +12,7 @@ const store = mockStore({
   APP: { city: CITY },
 });
 
+
 describe('Component: MainEmpty', () => {
   it('should render correctly', () => {
     render(
@@ -22,6 +23,7 @@ describe('Component: MainEmpty', () => {
       </Provider>
     );
 
-    expect(screen.getByRole('link')).toBeInTheDocument();
+    expect(screen.getByText('No places to stay available')).toBeInTheDocument();
+    expect(screen.getByText(`We could not find any property available at the moment in ${CITY.name}`)).toBeInTheDocument();
   });
 });
