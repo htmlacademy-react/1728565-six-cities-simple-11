@@ -12,7 +12,7 @@ const store = mockStore({
   APP: { city: CITY },
 });
 
-describe('Component: Logo', () => {
+describe('Component: MainEmpty', () => {
   it('should render correctly', () => {
     render(
       <Provider store={store}>
