@@ -1,24 +1,4 @@
-// import { useState } from 'react';
-
-// function FormCheck (props: {review: string}): JSX.Element {
-//   return (
-//     <>
-//       <h2>Отправленный отзыв</h2>
-//       <p>Отзыв: {props.review}</p>
-//     </>
-//   );
-// }
-
 export default function UserReviewForm(): JSX.Element {
-  // const [formData, setFormData] = useState({
-  //   review: '',
-  // });
-
-  // const formChangeHandle = (e) => {
-  //   const {name, value} = e.target;
-  //   setFormData({...formData, [name]: value});
-  // };
-
 
   return (
     <form className='reviews__form form' action='#' method='post'>
@@ -74,7 +54,6 @@ export default function UserReviewForm(): JSX.Element {
         </p>
         <button className='reviews__submit form__submit button' type='submit' disabled>Submit</button>
       </div>
-      {/* <FormCheck {...formData}/> */}
     </form>
 
   );
