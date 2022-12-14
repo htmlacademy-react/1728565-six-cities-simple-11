@@ -25,7 +25,7 @@ const newSort = 'Popular';
 const store = mockStore({
   APP: {
     city: newOffers[0].city,
-    cities: [newOffers[0].city, newOffers[1].city],
+    cities: [newOffers[0].city],
     sort: newSort,
     sortList: SORTLIST,
   },
