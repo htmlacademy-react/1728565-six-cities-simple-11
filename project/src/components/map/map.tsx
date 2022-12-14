@@ -30,7 +30,7 @@ export default function Map(props: MapProps & ClassNameType) {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
-  map?.setView([city.location.latitude, city.location.longitude], 12);
+  map?.setView([city.location.latitude, city.location.longitude]);
 
   useEffect(() => {
     if (map && offers) {

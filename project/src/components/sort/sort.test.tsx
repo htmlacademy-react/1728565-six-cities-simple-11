@@ -3,27 +3,29 @@ import { Provider } from 'react-redux';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { createMemoryHistory } from 'history';
 import HistoryRouter from '../history-route/history-route';
-import { generateReview } from '../../mocks/mocks';
-import Reviews from './reviews';
+import { SORTLIST } from '../../const';
+import Sort from './sort';
+import { generateOffer } from '../../mocks/mocks';
+
 
 const mockStore = configureMockStore();
 const history = createMemoryHistory();
-const review = generateReview();
-const reviews = [review];
+const newCity = generateOffer().city;
+const defaultSort = 'Popular';
 const store = mockStore({
-  OFFERS: { reviews: reviews },
+  APP: { city: newCity, sort: defaultSort, sortList: SORTLIST },
 });
 
-describe('Component: Reviews', () => {
+describe('Component: Sort', () => {
   it('should render correctly', () => {
     render(
       <Provider store={store}>
         <HistoryRouter history={history}>
-          <Reviews />
+          <Sort />
         </HistoryRouter>
       </Provider>
     );
 
-    expect(screen.getAllByText(review.comment)[0]).toBeInTheDocument();
+    expect(screen.getByText('Sort by')).toBeInTheDocument();
   });
 });

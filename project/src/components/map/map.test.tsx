@@ -1,16 +1,21 @@
-import {render, screen} from '@testing-library/react';
-import { CITY } from '../../const';
+import { render, screen } from '@testing-library/react';
 import { generateOffer } from '../../mocks/mocks';
 import Map from './map';
 
-const offers = [generateOffer(), generateOffer(), generateOffer()];
-const offer = generateOffer();
+const newOffers = [generateOffer(), generateOffer(), generateOffer()];
+const newOffer = generateOffer();
+const newCity = newOffer.city;
 const className = '';
 
 describe('Component: Map', () => {
   it('should render correctly', () => {
     render(
-      <Map className={className} offers={offers} selectedPoints={[offer]} city={CITY}/>
+      <Map
+        className={className}
+        offers={newOffers}
+        selectedPoints={[newOffer]}
+        city={newCity}
+      />
     );
 
     expect(screen.getByTestId('map')).toBeInTheDocument();

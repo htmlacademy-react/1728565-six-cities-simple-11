@@ -7,6 +7,7 @@ import { getOffersData } from '../offers-data/selectors';
 
 
 export const getCity = (state: State): City => state[NameSpace.App].city;
+export const getCitiesList = (state: State): City[] => state[NameSpace.App].cities;
 export const getSort = (state: State): string => state[NameSpace.App].sort;
 export const getSortList = (state: State): string[] => state[NameSpace.App].sortList;
 export const getError = (state: State): string | null => state[NameSpace.App].error;
@@ -34,7 +35,7 @@ export const getFilteredOffers = createSelector(
   }
 );
 
-export const calcRating = (rating: number) => `${(rating / 5 * 100).toString()}%`;
+export const calcRating = (rating: number) => `${(Math.round(rating) / 5 * 100).toString()}%`;
 
 export const parseDate = (date: string, datetime = true ) => {
   const utcDate = new Date(date);
