@@ -1,7 +1,7 @@
-import {render, screen} from '@testing-library/react';
-import {Provider} from 'react-redux';
-import {configureMockStore} from '@jedmao/redux-mock-store';
-import {createMemoryHistory} from 'history';
+import { render, screen } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { configureMockStore } from '@jedmao/redux-mock-store';
+import { createMemoryHistory } from 'history';
 import HistoryRouter from '../history-route/history-route';
 import { generateReview } from '../../mocks/mocks';
 import Reviews from './reviews';
@@ -11,7 +11,7 @@ const history = createMemoryHistory();
 const review = generateReview();
 const reviews = [review];
 const store = mockStore({
-  OFFERS: { reviews: reviews }
+  OFFERS: { reviews: reviews },
 });
 
 describe('Component: Reviews', () => {

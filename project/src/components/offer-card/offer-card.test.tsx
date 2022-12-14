@@ -2,7 +2,7 @@
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { createHashHistory } from 'history';
+import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import { AuthorizationStatus } from '../../const';
@@ -13,24 +13,20 @@ import HistoryRouter from '../history-route/history-route';
 import OfferCard from './offer-card';
 
 const mockStore = configureMockStore();
-const history = createHashHistory();
+const history = createMemoryHistory();
 const newOffer = generateOffer();
 const newNearOffers = [generateOffer(), generateOffer(), generateOffer()];
 const newReviews = generateReview();
 const store = mockStore({
-  OFFERS: {offer: newOffer, nearOffers: newNearOffers, reviews: [newReviews]},
-  USER: {authorizationStatus: AuthorizationStatus.Auth,}
-
+  OFFERS: { offer: newOffer, nearOffers: newNearOffers, reviews: [newReviews] },
+  USER: { authorizationStatus: AuthorizationStatus.Auth },
 });
 
-
 describe('Component: OfferCard', () => {
-
   const setHoveredCardActive = (hoveredOffers: OffersType) => {};
   const resetActiveCard = () => {};
 
   it('should redirect to an offer page', async () => {
-
     render(
       <Provider store={store}>
         <HistoryRouter history={history}>
@@ -46,7 +42,7 @@ describe('Component: OfferCard', () => {
                 />
               }
             />
-            <Route path={`/offer/${newOffer.id}`} element={<Offer />}/>
+            <Route path={`/offer/${newOffer.id}`} element={<Offer />} />
           </Routes>
         </HistoryRouter>
       </Provider>
@@ -54,6 +50,5 @@ describe('Component: OfferCard', () => {
 
     await userEvent.click(screen.getByText(newOffer.title));
     expect(screen.getByText(newOffer.description)).toBeInTheDocument();
-
   });
 });

@@ -1,6 +1,6 @@
 import { configureMockStore } from '@jedmao/redux-mock-store';
-import {render, screen} from '@testing-library/react';
-import { createHashHistory } from 'history';
+import { render, screen } from '@testing-library/react';
+import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
 import { CITY, SORTLIST } from '../../const';
 import { generateOffers } from '../../mocks/mocks';
@@ -9,7 +9,7 @@ import HistoryRouter from '../history-route/history-route';
 import Offers from './offers';
 
 const mockStore = configureMockStore();
-const history = createHashHistory();
+const history = createMemoryHistory();
 const store = mockStore({
   APP: { city: CITY, sortList: SORTLIST },
 });
@@ -20,7 +20,7 @@ describe('Component: Offers', () => {
     render(
       <Provider store={store}>
         <HistoryRouter history={history}>
-          <Offers offers={offers}/>
+          <Offers offers={offers} />
         </HistoryRouter>
       </Provider>
     );
@@ -33,12 +33,16 @@ describe('Component: Offers', () => {
     render(
       <Provider store={store}>
         <HistoryRouter history={history}>
-          <Offers offers={offers}/>
+          <Offers offers={offers} />
         </HistoryRouter>
       </Provider>
     );
 
     expect(screen.getByText('No places to stay available')).toBeInTheDocument();
-    expect(screen.getByText(`We could not find any property available at the moment in ${CITY.name}`)).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        `We could not find any property available at the moment in ${CITY.name}`
+      )
+    ).toBeInTheDocument();
   });
 });

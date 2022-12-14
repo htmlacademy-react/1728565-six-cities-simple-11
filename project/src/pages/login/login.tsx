@@ -57,8 +57,9 @@ export default function Login(): JSX.Element {
                   ref={emailRef}
                   className='login__input'
                   type='text'
-                  name='name'
-                  id='name'
+                  name='email'
+                  id='email'
+                  data-testid='email'
                   required
                 />
               </div>
@@ -70,6 +71,7 @@ export default function Login(): JSX.Element {
                   type='text'
                   name='password'
                   id='password'
+                  data-testid='password'
                   required
                 />
               </div>
