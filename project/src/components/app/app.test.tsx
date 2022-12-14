@@ -68,8 +68,7 @@ describe('App: Routing', () => {
       </Provider>
     );
 
-    expect(screen.getByText(/What's inside/i)).toBeInTheDocument();
-    expect(screen.getByText(/Meet the host/i)).toBeInTheDocument();
+    expect(screen.getByText(newOffers[0].description)).toBeInTheDocument();
 
   });
 
