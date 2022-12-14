@@ -69,7 +69,6 @@ describe('App: Routing', () => {
     );
 
     expect(screen.getByText(newOffers[0].description)).toBeInTheDocument();
-
   });
 
   it('should display loading screen if data loading', () => {
