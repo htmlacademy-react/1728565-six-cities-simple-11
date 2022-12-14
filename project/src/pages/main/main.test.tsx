@@ -14,7 +14,7 @@ const newEmail = generateEmail();
 const newCity = newOffers[0].city;
 const store = mockStore({
   OFFERS: { offers: newOffers },
-  APP: { city: newCity, sort: 'Popular', sortList: SORTLIST },
+  APP: { city: newCity, cities: newOffers, sort: 'Popular', sortList: SORTLIST },
   USER: { userEmail: newEmail, authorizationStatus: AuthorizationStatus.Auth}
 });
 
