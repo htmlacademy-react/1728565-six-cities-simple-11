@@ -15,7 +15,7 @@ const store = mockStore({
   APP: { userEmail: null },
 });
 
-describe('Component: LoginPage', () => {
+describe('Page: LoginPage', () => {
   it('should render correctly', async () => {
     history.push('/login');
     render(
