@@ -34,7 +34,7 @@ export const getFilteredOffers = createSelector(
   }
 );
 
-export const calcRating = (rating: number) => `${(rating / 5 * 100).toString()}%`;
+export const calcRating = (rating: number) => `${(Math.round(rating) / 5 * 100).toString()}%`;
 
 export const parseDate = (date: string, datetime = true ) => {
   const utcDate = new Date(date);
