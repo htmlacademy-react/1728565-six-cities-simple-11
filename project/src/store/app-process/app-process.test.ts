@@ -1,4 +1,4 @@
-import { CITY, SORTLIST } from '../../const';
+import { CITIES, CITY, SORTLIST } from '../../const';
 import { gerenateCity } from '../../mocks/mocks';
 import { AppProcess } from '../../types/state';
 import { appProcess, selectCity, setError, sortOffers } from './app-process';
@@ -12,6 +12,7 @@ describe('Reducer: appProcess', () => {
   beforeEach(() => {
     state = {
       city: CITY,
+      cities: CITIES,
       sort: 'Popular',
       sortList: SORTLIST,
       error: null,

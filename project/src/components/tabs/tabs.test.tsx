@@ -3,13 +3,14 @@ import { Provider } from 'react-redux';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { createMemoryHistory } from 'history';
 import HistoryRouter from '../history-route/history-route';
-import { CITIES, CITY } from '../../const';
 import Tabs from './tabs';
+import { generateOffer } from '../../mocks/mocks';
 
 const mockStore = configureMockStore();
 const history = createMemoryHistory();
+const newCity = generateOffer().city;
 const store = mockStore({
-  APP: { city: CITY },
+  APP: { city: newCity, cities: [newCity] },
 });
 
 describe('Component: Tabs', () => {
@@ -22,8 +23,6 @@ describe('Component: Tabs', () => {
       </Provider>
     );
 
-    CITIES.forEach((city) =>
-      expect(screen.getByText(city.name)).toBeInTheDocument()
-    );
+    expect(screen.getByText(newCity.name)).toBeInTheDocument();
   });
 });

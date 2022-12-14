@@ -1,10 +1,10 @@
 import { render, screen } from '@testing-library/react';
-import { CITY } from '../../const';
 import { generateOffer } from '../../mocks/mocks';
 import Map from './map';
 
-const offers = [generateOffer(), generateOffer(), generateOffer()];
-const offer = generateOffer();
+const newOffers = [generateOffer(), generateOffer(), generateOffer()];
+const newOffer = generateOffer();
+const newCity = newOffer.city;
 const className = '';
 
 describe('Component: Map', () => {
@@ -12,9 +12,9 @@ describe('Component: Map', () => {
     render(
       <Map
         className={className}
-        offers={offers}
-        selectedPoints={[offer]}
-        city={CITY}
+        offers={newOffers}
+        selectedPoints={[newOffer]}
+        city={newCity}
       />
     );
 

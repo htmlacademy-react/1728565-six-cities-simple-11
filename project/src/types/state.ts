@@ -15,6 +15,7 @@ export type UserProcess = {
 
 export type AppProcess = {
   city: City;
+  cities: City[];
   sort: string;
   sortList: string[];
   error: string | null;

@@ -6,8 +6,6 @@ import Login from '../../pages/login/login';
 import Offer from '../../pages/offer/offer';
 import { useAppSelector } from '../../hooks';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
-import browserHistory from '../../browser-history';
-import HistoryRouter from '../history-route/history-route';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { getDataLoadingState } from '../../store/offers-data/selectors';
 
@@ -20,17 +18,15 @@ function App(): JSX.Element {
   }
 
   return (
-    <HistoryRouter history={browserHistory}>
-      <Routes>
-        <Route path={AppRoute.Root} element={<Main />} />
-        <Route path={AppRoute.Login} element={<Login />} />
-        <Route path={AppRoute.Offer}>
-          <Route index element={<NotFound />} />
-          <Route path=':id' element={<Offer />} />
-        </Route>
-        <Route path='*' element={<NotFound />} />
-      </Routes>
-    </HistoryRouter>
+    <Routes>
+      <Route path={AppRoute.Root} element={<Main />} />
+      <Route path={AppRoute.Login} element={<Login />} />
+      <Route path={AppRoute.Offer}>
+        <Route index element={<NotFound />} />
+        <Route path=':id' element={<Offer />} />
+      </Route>
+      <Route path='*' element={<NotFound />} />
+    </Routes>
   );
 }
 
