@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import {
   AppRoute,
   AuthorizationStatus,
-  SORTLIST,
+  SORT_LIST,
 } from '../../const';
 import {
   generateOffer,
@@ -27,7 +27,7 @@ const store = mockStore({
     city: newOffers[0].city,
     cities: [newOffers[0].city],
     sort: newSort,
-    sortList: SORTLIST,
+    sortList: SORT_LIST,
   },
   OFFERS: {
     offers: newOffers,

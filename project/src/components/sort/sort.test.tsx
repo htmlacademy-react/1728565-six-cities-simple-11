@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { createMemoryHistory } from 'history';
 import HistoryRouter from '../history-route/history-route';
-import { SORTLIST } from '../../const';
+import { SORT_LIST } from '../../const';
 import Sort from './sort';
 import { generateOffer } from '../../mocks/mocks';
 
@@ -13,7 +13,7 @@ const history = createMemoryHistory();
 const newCity = generateOffer().city;
 const defaultSort = 'Popular';
 const store = mockStore({
-  APP: { city: newCity, sort: defaultSort, sortList: SORTLIST },
+  APP: { city: newCity, sort: defaultSort, sortList: SORT_LIST },
 });
 
 describe('Component: Sort', () => {

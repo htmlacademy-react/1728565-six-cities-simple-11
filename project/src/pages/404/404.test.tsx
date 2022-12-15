@@ -5,7 +5,7 @@ import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import HistoryRouter from '../../components/history-route/history-route';
-import { AppRoute, AuthorizationStatus, SORTLIST } from '../../const';
+import { AppRoute, AuthorizationStatus, SORT_LIST } from '../../const';
 import {
   generateOffer,
   generateOffers,
@@ -26,7 +26,7 @@ const store = mockStore({
     city: newOffers[0].city,
     cities: [newOffers[0].city, newOffers[1].city],
     sort: newSort,
-    sortList: SORTLIST,
+    sortList: SORT_LIST,
   },
   OFFERS: {
     offers: newOffers,

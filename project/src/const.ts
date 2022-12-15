@@ -42,7 +42,7 @@ export enum SortTypes {
 
 export const TIMEOUT_SHOW_ERROR = 2000;
 
-export const SORTLIST = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'];
+export const SORT_LIST = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'];
 
 export const CITY: City = {
   name: 'Amsterdam',
