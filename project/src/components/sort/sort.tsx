@@ -20,7 +20,6 @@ export default function Sort(): JSX.Element {
   const onSortClick = ({ target }: React.MouseEvent) => {
     const clickedSort = (target as HTMLElement).innerText;
     if (clickedSort === sort) {
-      // setIsOpened(false);
       return;
     }
 

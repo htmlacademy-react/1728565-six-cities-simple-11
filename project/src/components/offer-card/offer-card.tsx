@@ -1,4 +1,3 @@
-// import { OfferObjectType } from '../../types/types';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { calcRating } from '../../store/app-process/selectors';
