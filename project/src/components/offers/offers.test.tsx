@@ -2,7 +2,7 @@ import { configureMockStore } from '@jedmao/redux-mock-store';
 import { render, screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
-import { CITY, SORTLIST } from '../../const';
+import { CITY, SORT_LIST } from '../../const';
 import { generateOffers } from '../../mocks/mocks';
 import { OffersType } from '../../types/offers';
 import HistoryRouter from '../history-route/history-route';
@@ -11,7 +11,7 @@ import Offers from './offers';
 const mockStore = configureMockStore();
 const history = createMemoryHistory();
 const store = mockStore({
-  APP: { city: CITY, sortList: SORTLIST },
+  APP: { city: CITY, sortList: SORT_LIST },
 });
 
 describe('Component: Offers', () => {

@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
 import HistoryRouter from '../../components/history-route/history-route';
-import { AuthorizationStatus, SORTLIST } from '../../const';
+import { AuthorizationStatus, SORT_LIST } from '../../const';
 import { generateEmail, generateOffers } from '../../mocks/mocks';
 import Main from './main';
 
@@ -14,7 +14,7 @@ const newEmail = generateEmail();
 const newCity = newOffers[0].city;
 const store = mockStore({
   OFFERS: { offers: newOffers },
-  APP: { city: newCity, cities: newOffers, sort: 'Popular', sortList: SORTLIST },
+  APP: { city: newCity, cities: newOffers, sort: 'Popular', sortList: SORT_LIST },
   USER: { userEmail: newEmail, authorizationStatus: AuthorizationStatus.Auth}
 });
 

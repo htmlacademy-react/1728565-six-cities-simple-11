@@ -42,10 +42,8 @@ export default function UserReviewForm(): JSX.Element {
       <textarea
         className='reviews__textarea form__textarea'
         id='review'
-        // value={formData.review}
         name='review'
         placeholder='Tell how was your stay, what you like and what can be improved'
-        // onChange={formChangeHandle}
       >
       </textarea>
       <div className='reviews__button-wrapper'>

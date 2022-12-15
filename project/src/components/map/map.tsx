@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react';
-import { ClassNameType } from '../../types/types';
+import { ClassName } from '../../types/class-name';
 import { Icon, Marker } from 'leaflet';
 import useMap from '../../hooks/useMap';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const';
@@ -25,7 +25,7 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40],
 });
 
-export default function Map(props: MapProps & ClassNameType) {
+export default function Map(props: MapProps & ClassName) {
   const { city, offers, selectedPoints, className } = props;
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);

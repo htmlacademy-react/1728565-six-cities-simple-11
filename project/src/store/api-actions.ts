@@ -110,7 +110,3 @@ export const logoutAction = createAsyncThunk<
   dropToken();
   dispatch(setUserCredentials(null));
 });
-
-// export const clearErrorAction = createAsyncThunk<void>('data/clearError', () => {
-//   setTimeout(() => store.dispatch(setError(null)), TIMEOUT_SHOW_ERROR);
-// });

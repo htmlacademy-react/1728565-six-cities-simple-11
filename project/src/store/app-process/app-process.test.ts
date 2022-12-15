@@ -1,4 +1,4 @@
-import { CITIES, CITY, SORTLIST } from '../../const';
+import { CITIES, CITY, SORT_LIST } from '../../const';
 import { gerenateCity } from '../../mocks/mocks';
 import { AppProcess } from '../../types/state';
 import { appProcess, selectCity, setError, sortOffers } from './app-process';
@@ -14,7 +14,7 @@ describe('Reducer: appProcess', () => {
       city: CITY,
       cities: CITIES,
       sort: 'Popular',
-      sortList: SORTLIST,
+      sortList: SORT_LIST,
       error: null,
     };
   });
