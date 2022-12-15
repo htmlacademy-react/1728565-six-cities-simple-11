@@ -12,7 +12,7 @@ import {
   generateReview,
 } from '../../mocks/mocks';
 import Main from '../main/main';
-import NotFound from './404';
+import NotFound from './not-found';
 
 const history = createMemoryHistory();
 const mockStore = configureMockStore();

@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import Main from '../../pages/main/main';
-import NotFound from '../../pages/404/404';
+import NotFound from '../../pages/not-found/not-found';
 import Login from '../../pages/login/login';
 import Offer from '../../pages/offer/offer';
 import { useAppSelector } from '../../hooks';
